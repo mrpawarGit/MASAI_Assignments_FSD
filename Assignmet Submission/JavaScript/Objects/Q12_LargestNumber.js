@@ -10,9 +10,12 @@ Output: 78 (The largest number)
  */
 
 function largestNumber(num1,num2,num3){
-  return num1>num2 && num1>num3 ? `${num1} (The largest number)`:
-         num2>num1 && num2>num3 ? `${num2} (The largest number)`:
-         num3>num1 && num3>num2 ? `${num3} (The largest number)`: "All are Equals";
+  return num1>=num2 && num1>=num3 ? `${num1} (The largest number)`:
+         num2>=num1 && num2>=num3 ? `${num2} (The largest number)`:
+         num3>=num1 && num3>=num2 ? `${num3} (The largest number)`:"";
 }
 
 console.log(largestNumber(1,2,3));
+console.log(largestNumber(45,78,33));
+console.log(largestNumber(45,45,33));
+console.log(largestNumber(45,45,45));
