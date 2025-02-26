@@ -28,3 +28,6 @@ function discount(age){
 
 
 console.log(discount(65));
+console.log(discount(0));
+console.log(discount(-1));
+console.log(discount(25));
