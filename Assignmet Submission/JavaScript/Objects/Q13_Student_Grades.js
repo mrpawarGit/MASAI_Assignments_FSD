@@ -36,3 +36,31 @@ Submission Guidelines:
 Please submit your Masai Git directory link.
 
  */
+
+function studentGrades(studentScores) {
+  for (let s in studentScores) {
+    let score = studentScores[s];
+    
+    if (score >= 90) {
+      console.log(s, "- A");
+    } else if (score >= 80) {
+      console.log(s, "- B");
+    } else if (score >= 70) {
+      console.log(s, "- C");
+    } else if (score >= 60) {
+      console.log(s, "- D");
+    } else {
+      console.log(s, "- F");
+    }
+  }
+}
+
+let studentScores = {
+  John: 85,
+  Emma: 92,
+  Sam: 67,
+  Bob: 45
+};
+
+studentGrades(studentScores);
+
