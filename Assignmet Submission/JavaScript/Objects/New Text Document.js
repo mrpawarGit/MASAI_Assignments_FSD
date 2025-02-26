@@ -17,3 +17,14 @@ Output: "Invalid Age"
 Submission Guidelines: Please submit your Masai Git directory link.
 
  */
+
+function discount(age){
+
+  let output = age<=0 ? "Invalid Age" : 
+               age>=60 ? "Eligible for Senior Discount" : "Not Eligible for Senior Discount";
+
+  return output;
+}
+
+
+console.log(discount(65));
