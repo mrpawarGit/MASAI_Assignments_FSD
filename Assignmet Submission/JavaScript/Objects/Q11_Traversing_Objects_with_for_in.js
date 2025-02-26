@@ -15,3 +15,16 @@ title: The Hobbit author: J.R.R. Tolkien year: 1937
 
 Submission Guidelines: Please submit your masai git directory link.
  */
+
+function traversingObj(obj){
+  let bag = ""
+  for(let o in obj){
+    bag += `${o}: ${obj[o]} `;
+  }
+  console.log(bag);
+}
+
+
+let book = { title: "The Hobbit", author: "J.R.R. Tolkien", year: 1937 };
+
+traversingObj(book);
