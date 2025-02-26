@@ -1,5 +1,4 @@
 /**
-
 Q: 13
 Title:
 L1 - Student Grades Based on Score
@@ -40,7 +39,7 @@ Please submit your Masai Git directory link.
 function studentGrades(studentScores) {
   for (let s in studentScores) {
     let score = studentScores[s];
-    
+
     if (score >= 90) {
       console.log(s, "- A");
     } else if (score >= 80) {
