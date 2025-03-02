@@ -56,3 +56,34 @@ Expected Output:
 ]
  */
 
+const products = [
+  {
+    id: 101,
+    details: { name: "Laptop", price: 1200, category: "Electronics" },
+    stock: { available: true, quantity: 4 },
+    variants: [{ color: "Silver" }, { color: "Black" }]
+  },
+  {
+    id: 102,
+    details: { name: "Shoes", price: 150, category: "Fashion" },
+    stock: { available: true, quantity: 10 },
+    variants: [{ size: "M" }, { size: "L" }]
+  },
+  {
+    id: 103,
+    details: { name: "Smartphone", price: 800, category: "Electronics" },
+    stock: { available: false, quantity: 0 },
+    variants: [{ color: "Blue" }, { color: "Black" }]
+  },
+  {
+    id: 104,
+    details: { name: "Monitor", price: 300, category: "Electronics" },
+    stock: { available: true, quantity: 2 },
+    variants: [{ size: "24-inch" }, { size: "27-inch" }]
+  }
+];
+
+let ans = products.filter(({stock:{available}},{details:{category}})=>{
+  if(stock==true && category=="Electronics"){}
+})
+

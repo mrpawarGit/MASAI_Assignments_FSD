@@ -1,0 +1,157 @@
+Q: 1
+Problem 1: Advanced Product Catalog (Destructuring, Spreading, Multi-Level Destructuring, Arrow Functions)
+An e-commerce platform has an inventory of products, each with multiple variants. Your task is to:
+
+Extract essential product details from nested objects.
+Apply a 10% discount only to products that belong to the "Electronics" category.
+Filter out out-of-stock products.
+Ensure the original array remains unchanged.
+Input Example:
+
+const products = [
+  {
+    id: 101,
+    details: { name: "Laptop", price: 1200, category: "Electronics" },
+    stock: { available: true, quantity: 4 },
+    variants: [{ color: "Silver" }, { color: "Black" }]
+  },
+  {
+    id: 102,
+    details: { name: "Shoes", price: 150, category: "Fashion" },
+    stock: { available: true, quantity: 10 },
+    variants: [{ size: "M" }, { size: "L" }]
+  },
+  {
+    id: 103,
+    details: { name: "Smartphone", price: 800, category: "Electronics" },
+    stock: { available: false, quantity: 0 },
+    variants: [{ color: "Blue" }, { color: "Black" }]
+  },
+  {
+    id: 104,
+    details: { name: "Monitor", price: 300, category: "Electronics" },
+    stock: { available: true, quantity: 2 },
+    variants: [{ size: "24-inch" }, { size: "27-inch" }]
+  }
+];
+
+Expected Output:
+
+[
+  {
+    id: 101,
+    name: "Laptop",
+    price: 1200,
+    discountPrice: 1080,
+    category: "Electronics"
+  },
+  {
+    id: 104,
+    name: "Monitor",
+    price: 300,
+    discountPrice: 270,
+    category: "Electronics"
+  }
+]
+
+
+
+Problem 2: Multi-User Authentication System (Closures & Abstraction)
+You need to build a multi-user authentication system where:
+
+Users can sign up with createUser(username, password).
+Users can log in using user.login(password).
+Users can change their password with user.changePassword(oldPassword, newPassword).
+Users cannot access the password directly.
+Input Example:
+
+const user1 = createUser("alice_01", "AlicePass!");
+const user2 = createUser("bob_42", "BobSecure123");
+
+console.log(user1.login("wrongPass")); // ❌ "Incorrect password!"
+console.log(user1.login("AlicePass!")); // ✅ "Welcome, alice_01!"
+
+user1.changePassword("AlicePass!", "NewAlicePass!");
+console.log(user1.login("AlicePass!")); // ❌ "Incorrect password!"
+console.log(user1.login("NewAlicePass!")); // ✅ "Welcome, alice_01!"
+
+console.log(user2.login("BobSecure123")); // ✅ "Welcome, bob_42!"
+
+Constraints:
+
+Multiple users must be supported.
+Passwords should remain private.
+
+
+Problem 3: Sales Analytics Dashboard (HOF - filter, map, reduce)
+A company wants an analytics engine to:
+
+Filter out transactions below $200.
+Transform transactions into user-friendly descriptions: "<Product> sold for $<Amount>".
+Compute total revenue from filtered transactions.
+Input Example:
+
+const sales = [
+  { product: "Laptop", amount: 2500, date: "2025-01-15", customer: "Alice" },
+  { product: "Mouse", amount: 30, date: "2025-02-10", customer: "Bob" },
+  { product: "Smartphone", amount: 900, date: "2025-02-15", customer: "Charlie" },
+  { product: "Keyboard", amount: 150, date: "2025-02-18", customer: "David" },
+  { product: "Monitor", amount: 400, date: "2025-02-20", customer: "Eve" },
+  { product: "Headphones", amount: 220, date: "2025-02-22", customer: "Frank" }
+];
+
+Expected Output:
+
+[
+  { product: "Laptop", amount: 2500 },
+  { product: "Smartphone", amount: 900 },
+  { product: "Monitor", amount: 400 },
+  { product: "Headphones", amount: 220 }
+]
+
+[
+  "Laptop sold for $2500",
+  "Smartphone sold for $900",
+  "Monitor sold for $400",
+  "Headphones sold for $220"
+]
+
+Total Revenue: $4020
+
+
+
+Problem 4: Text Analyzer & Word Frequency Counter (split, trim, map, filter, reduce, sorting)
+You need to develop a function that analyzes text to generate a word frequency list.
+
+The function should:
+
+Clean the text: remove extra spaces and punctuation.
+Split the text into words.
+Filter out common filler words (["the", "is", "and", "a", "to", "it"]).
+Count word occurrences using reduce().
+Sort words by frequency.
+Input Example:
+
+const review = `
+  The laptop is amazing! I love it.
+  The battery life is excellent, and the price is reasonable.
+  Amazing product, highly recommended!
+  Laptop is great, but battery could be better.
+`;
+
+Expected Output:
+
+[
+  { word: "laptop", count: 2 },
+  { word: "amazing", count: 2 },
+  { word: "battery", count: 2 },
+  { word: "great", count: 1 },
+  { word: "life", count: 1 },
+  { word: "excellent", count: 1 },
+  { word: "price", count: 1 },
+  { word: "reasonable", count: 1 },
+  { word: "product", count: 1 },
+  { word: "highly", count: 1 },
+  { word: "recommended", count: 1 },
+  { word: "better", count: 1 }
+]
