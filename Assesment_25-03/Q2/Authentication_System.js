@@ -27,3 +27,41 @@ Passwords should remain private.
 
  */
 
+function createUser(username,password){
+  let pass = password;
+  
+    let user = {
+      login : function(password)
+      {
+        if(password===pass){
+        return `Welcome, ${username}!`;
+        }
+        else{
+        return "Incorrect password!";
+        }
+      },
+      changePassword : function(oldPassword,newPassword){
+        if(oldPassword===pass){
+          pass=newPassword;
+        }
+        else{
+          console.log("Incorrect old Password");
+        }
+      }
+  }
+
+  return user;
+ 
+}
+
+const user1 = createUser("alice_01", "AlicePass!");
+const user2 = createUser("bob_42", "BobSecure123");
+
+console.log(user1.login("AlicePass!"));
+console.log(user2.login("BobSecure123"));
+
+user1.changePassword("AlicePass!", "NewAlicePass!");
+console.log(user1.login("AlicePass!"));
+console.log(user1.login("NewAlicePass!"));
+
+
