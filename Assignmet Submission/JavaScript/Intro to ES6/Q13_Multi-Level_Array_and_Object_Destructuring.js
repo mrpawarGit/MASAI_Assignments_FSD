@@ -35,6 +35,6 @@ let str2 = `${u2_name} lives in ${u2_city} on ${u2_sname}`;
 console.log(str1);
 console.log(str2);
 
-//output
+//output in array format
 let arr = [str1,str2];
 console.log(arr);
