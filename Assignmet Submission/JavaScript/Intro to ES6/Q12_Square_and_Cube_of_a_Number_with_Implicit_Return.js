@@ -26,7 +26,6 @@ let power = (a)=>{obj["square"]=a**2; obj["cube"]=a**3;}
 power(5);
 console.log(obj);
 
-
 //app2
 let pow = (a) =>({square:a**2,cube:a**3});
 console.log(pow(5));
