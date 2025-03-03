@@ -84,6 +84,15 @@ const products = [
 ];
 
 let ans = products.filter(({stock:{available}},{details:{category}})=>{
-  if(stock==true && category=="Electronics"){}
-})
+  available && category==="Electronics"})
+
+let ans2 = products.map({id,details: { name, price, category}})={
+    id,
+    name,
+    price,
+    discountPrice: price*.10,
+    category
+};
+
+console.log(ans2)
 
