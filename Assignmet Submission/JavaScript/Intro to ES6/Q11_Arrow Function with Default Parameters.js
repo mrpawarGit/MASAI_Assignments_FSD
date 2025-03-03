@@ -33,3 +33,11 @@ Example Output (with defaults):
 1
 
  */
+
+let multiply = (a=1,b=1)=>{
+  return a*b;
+}
+
+console.log(multiply());
+console.log(multiply(3, 4));
+console.log(multiply(5,2));;
