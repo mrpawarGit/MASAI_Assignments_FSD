@@ -1,6 +1,6 @@
 /**
 Q: 15
-Title: L2 - Preventing Stack Overflow in Recursion
+Title: L2 - Preventing_Stack_Overflow_in_Recursion
 
 Problem Statement:
 You are required to write a recursive function factorial to calculate the factorial of a given number. However, you also need to handle potential stack overflow issues by adding a check to prevent an infinite recursion in case of incorrect input or base cases. Specifically, ensure that:
