@@ -21,3 +21,17 @@ Steps:
 5.Test with multiple inputs to demonstrate correctness and safety.
 
  */
+
+function factorial(n){
+   if(n<0 ||typeof n!== "number") return "Invalid input"
+   if(n===1) return 1;
+   return n * factorial(n-1)
+}
+
+//invalid inputs
+console.log(factorial(-11))
+console.log(factorial("5"))
+
+//valid input
+console.log(factorial(3))
+
