@@ -33,4 +33,5 @@ const processProducts = products.map((ele)=>{return ele})
                           }
                         })
 
-products.processProducts;
+//products.processProducts;
+processProducts;
