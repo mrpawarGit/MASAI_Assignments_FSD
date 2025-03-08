@@ -47,3 +47,31 @@ Explanation:
  and Jeans need 10 more units ($400), so the total for "Clothing" is $2,000.
 -Accessories: The Watch needs 30 more units, costing $4,500.
  */
+
+const products = [
+  { name: "Laptop", category: "Electronics", stock: 50, pricePerUnit: 1000 },
+  { name: "Phone", category: "Electronics", stock: 150, pricePerUnit: 500 },
+  { name: "T-shirt", category: "Clothing", stock: 40, pricePerUnit: 20 },
+  { name: "Jeans", category: "Clothing", stock: 90, pricePerUnit: 40 },
+  { name: "Watch", category: "Accessories", stock: 70, pricePerUnit: 150 }
+]
+
+let sum = 0;
+
+const inventory = products.filter((ele)=>ele.stock<100)
+                  .map((ele)=>({
+                    name:ele.name,
+                    category:ele.category,
+                    pricePerUnit:ele.pricePerUnit * (100 - ele.stock)
+                  }))
+                  .reduce((acc,itm)=>{
+                    acc[itm.category] = acc[itm.category] || 0  ;
+                    acc[itm.category] += itm.pricePerUnit
+                    //console.log(acc[itm.category] = acc[itm.category] || 0)
+                    return acc; 
+                  },{})
+
+
+//total reorder cost (which is pricePerUnit * (100 - current stock))
+
+console.log(inventory);
