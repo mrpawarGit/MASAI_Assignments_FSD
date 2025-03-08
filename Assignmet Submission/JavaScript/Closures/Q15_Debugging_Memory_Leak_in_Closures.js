@@ -52,6 +52,7 @@ function createHeavyDataHandler() {
     clearData: function () {
       console.log("Clearing data");
       largeData = null; // Attempt to free memory 
+      delete this.processData;
     }
   };
 }
@@ -61,8 +62,4 @@ const handler = createHeavyDataHandler();
 handler.processData(); // Output: Processing data of size: 1000000
 handler.clearData();    // Output: Clearing data
 
-handler.processData(); // After Cleaning printing it "Null" now
-
-
-
-// Despite clearing the data, memory usage remains high. Why is that?
+//handler.processData(); // After Cleaning printing it "Null" now
