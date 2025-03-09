@@ -16,3 +16,45 @@ Version Control & Deployment
 Use Git for version control and push your code to a public GitHub repository.
 Submission Requirements
  */
+
+function taskManager(){
+  let task = [];
+
+  return{
+    addTask: function(title){
+      task.push({title, status:"pending"})
+    },
+    completeTask: function(title){
+      task = task.map((ele)=>{
+        if(ele.title==title){
+          return {title,status:"complete"}
+        }
+      })
+    },
+    // filterTask: function(status){
+    //  result = task.filter(()=>{
+    //   return task.status == status;
+    //  })
+    //  return result;
+    // }
+    //,
+    listTask: function(){
+      task.forEach((ele)=>{
+        console.log(ele);
+      })
+    }
+  }
+}
+
+const tk = taskManager();
+tk.addTask("Presentation");
+tk.addTask("Manufacturing");
+tk.listTask();
+
+tk.completeTask("Presentation");
+tk.listTask();
+
+//tk.filterTask("complete")
+
+
+
