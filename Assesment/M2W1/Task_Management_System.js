@@ -26,7 +26,7 @@ function taskManager() {
       return this;
     },
 
-    completeTask(title) {
+    completeTask: function(title) {
       tasks = tasks.map(task => {
         if (task.title == title) {
           return { ...task, status: "complete" };
@@ -37,21 +37,21 @@ function taskManager() {
       return this;
     },
 
-    filterTask(status) {
+    filterTask: function(status) {
       return tasks.filter(task => task.status === status);
     },
 
-    listTask() {
+    listTask: function() {
       tasks.forEach(task => console.log(task));
       return this;
     },
 
-    sortTask() {
+    sortTask: function() {
       tasks.sort((a, b) => a.title.localeCompare(b.title));
       return this;
     },
 
-    countTask() {
+    countTask: function() {
       return tasks.reduce(
         (acc, task) => {
           acc[task.status] = (acc[task.status] || 0) + 1;
