@@ -28,7 +28,7 @@ function taskManager() {
 
     completeTask(title) {
       tasks = tasks.map(task => {
-        if (task.title === title) {
+        if (task.title == title) {
           return { ...task, status: "complete" };
         } else {
           return task;
