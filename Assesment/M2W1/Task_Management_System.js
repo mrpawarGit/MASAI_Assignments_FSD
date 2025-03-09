@@ -17,33 +17,50 @@ Use Git for version control and push your code to a public GitHub repository.
 Submission Requirements
  */
 
-function taskManager(){
-  let task = [];
+function taskManager() {
+  let tasks = [];
 
-  return{
-    addTask: function(title){
-      task.push({title, status:"pending"})
+  return {
+    addTask(title) {
+      tasks.push({ title, status: "pending" });
+      return this;
     },
-    completeTask: function(title){
-      task = task.map((ele)=>{
-        if(ele.title==title){
-          return {title,status:"complete"}
+
+    completeTask(title) {
+      tasks = tasks.map(task => {
+        if (task.title === title) {
+          return { ...task, status: "complete" };
+        } else {
+          return task;
         }
-      })
+      });
+      return this;
     },
-    // filterTask: function(status){
-    //  result = task.filter(()=>{
-    //   return task.status == status;
-    //  })
-    //  return result;
-    // }
-    //,
-    listTask: function(){
-      task.forEach((ele)=>{
-        console.log(ele);
-      })
+
+    filterTask(status) {
+      return tasks.filter(task => task.status === status);
+    },
+
+    listTask() {
+      tasks.forEach(task => console.log(task));
+      return this;
+    },
+
+    sortTask() {
+      tasks.sort((a, b) => a.title.localeCompare(b.title));
+      return this;
+    },
+
+    countTask() {
+      return tasks.reduce(
+        (acc, task) => {
+          acc[task.status] = (acc[task.status] || 0) + 1;
+          return acc;
+        },
+        { pending: 0, complete: 0 }
+      );
     }
-  }
+  };
 }
 
 const tk = taskManager();
@@ -52,9 +69,11 @@ tk.addTask("Manufacturing");
 tk.listTask();
 
 tk.completeTask("Presentation");
+tk.listTask()
+
+console.log("Filtered Tasks:", tk.filterTask("complete"));
+
+tk.sortTask();
 tk.listTask();
 
-//tk.filterTask("complete")
-
-
-
+console.log("Task Count:", tk.countTask());
