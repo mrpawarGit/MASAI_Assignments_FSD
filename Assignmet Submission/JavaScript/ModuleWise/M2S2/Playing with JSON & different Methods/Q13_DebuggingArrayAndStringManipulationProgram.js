@@ -10,8 +10,7 @@ make sure it works correctly. The program should perform the following:
 
 1. Add a new student name at a specific position using splice.
 2. Check if a student's name exists in the array using includes.
-3. Convert the array of student names into a single string where names are separated 
-   by commas using join.
+3. Convert the array of student names into a single string where names are separated by commas using join.
 
 The existing code is as follows:
 
