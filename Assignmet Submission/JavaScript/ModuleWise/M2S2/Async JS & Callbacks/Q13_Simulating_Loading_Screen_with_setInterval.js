@@ -10,11 +10,11 @@ Create a JavaScript program that simulates a loading screen using setInterval. T
 Use setInterval to repeat the loading message and clearInterval to stop it after 5 seconds.
 */
 
-const loading = setInterval(()=>{
+const loading = setInterval(() => {
   console.log("Loading...")
-},1000)
+}, 1000)
 
-setTimeout(()=>{
+setTimeout(() => {
   clearInterval(loading)
   console.log("Loaded successfully!");
-},5000)
+}, 5000)
