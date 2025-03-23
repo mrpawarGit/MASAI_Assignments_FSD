@@ -44,9 +44,31 @@ Higher-Order Functions (HOFs) like .map(), .filter(), and .sort().
 
 function taskManager(){
   let task = [];
-  let taskId = 1;
+  let taskId = 0;
 
   return{
-    
+    //1
+    addTask(title){
+      task.push({id: ++taskId,title,completed: false});
+    },
+    //2
+    getAllTasks(){
+      return JSON.stringify(task);
+    },
+
+    //3
+    markComplete(taskId){
+      task.forEach(task =>{
+        if(task.id == taskId){
+          task.completed = true;
+        }
+      })
+    }
   }
 }
+
+let taskMan = taskManager();
+
+taskMan.addTask("Presentation");
+
+console.log(taskMan.getAllTasks());
