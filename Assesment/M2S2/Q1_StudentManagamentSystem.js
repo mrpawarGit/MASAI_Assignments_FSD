@@ -72,6 +72,17 @@ function createStudentManager() {
         }
       })
       console.log(students)
+    },
+
+    //3
+    getStudentDetails(name){
+      let sDetails = "Student Not Found"
+      students.forEach(stu=>{
+        if(stu.name===name){
+          sDetails = stu
+        }
+      })
+      return sDetails;
     }
     
   }
@@ -80,6 +91,9 @@ function createStudentManager() {
 let sm = createStudentManager();
 sm.addStudent("Raju");
 sm.updateScore("Raju", "Science", 80);
+sm.updateScore("Raju", "Maths", 80);
+
+console.log(sm.getStudentDetails("Raju"))
 
 
 
