@@ -57,23 +57,30 @@ Key Requirements
 function createStudentManager(){
   let students = [];
   return{
+    //1
     addStudent(name){
-      students.push({"name":name})
+      students.push({name,subjects:{}})
       console.log(students)
     },
-
-    getStudentDetails(name){
-      if(students[name]==name){
-      }
-
+    //2
+    updateScore(name,score,subject){
+      students.forEach((stu)=>{
+        if(stu.name == name){
+          students = students.subjects[subject]=score;
+        }
+      })
+      console.log(students)
     }
+    
   }
 }
 
 let sm = createStudentManager();
 sm.addStudent("Raju");
-sm.addStudent("Laxmi");
-console.log(sm.getStudentDetails("Raju"));
+
+sm.updateScore("Raju",80,"Science")
+
+
 
 
 
