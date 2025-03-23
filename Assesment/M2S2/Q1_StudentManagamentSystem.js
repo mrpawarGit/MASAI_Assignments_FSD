@@ -61,7 +61,7 @@ function createStudentManager() {
     //1
     addStudent(name) {
       students.push({ name, subjects: {} });
-      console.log(students);
+      //console.log(students);
     },
 
     //2
@@ -71,7 +71,7 @@ function createStudentManager() {
           stu.subjects[subject] = score;
         }
       })
-      console.log(students)
+      //console.log(students)
     },
 
     //3
@@ -92,7 +92,36 @@ function createStudentManager() {
           stu.subjects[subject] = score;
         }
       })
-      console.log(students)
+      //console.log(students)
+    },
+
+    //5
+    getSortedStudents(sortBy){
+      if(sortBy=="name"){
+        return students.sort((a,b)=>a.name.localeCompare(b.name))
+      }
+    },
+    //6
+    getInsights(){
+      //
+      let total_students = students.length
+      console.log("Total Students:",total_students);
+      //
+      let avgScore = students.map((stu,ind)=>{
+        return {
+          name:stu.name,
+          avgScore:((stu.subjects.Science + stu.subjects.Maths + stu.subjects.Eng)/3).toFixed(2)
+        }
+      })
+      console.log("Avg Of All Students:",avgScore)
+      //above 85
+      let toppers = avgScore.filter((ele)=>ele.avgScore>85)
+      
+      console.log("Toppers:",toppers);
+
+      //failed -> below 35
+      let fail = avgScore.filter((stu)=>stu.avgScore<35)
+      console.log("Failed students:",fail)
     }
     
   }
@@ -101,13 +130,31 @@ function createStudentManager() {
 let sm = createStudentManager();
 sm.addStudent("Raju");
 sm.addStudent("Rani");
+
 sm.updateScore("Raju", "Science", 80);
 sm.updateScore("Raju", "Maths", 80);
+sm.updateScore("Raju", "Eng", 80);
 
 console.log(sm.getStudentDetails("Raju"))
 
-sm.addSubject("Raju", "Eng", 80)
-sm.addSubject("Rani","Eng",75)
+sm.addSubject("Rani","Science",25)
+sm.addSubject("Rani","Maths",75)
+sm.addSubject("Rani", "Eng", 80)
+
+console.log(sm.getSortedStudents("name"))
+
+sm.addStudent("Naman");
+sm.addSubject("Naman", "Eng", 25)
+sm.addSubject("Naman", "Maths", 35)
+sm.addSubject("Naman", "Science", 20)
+
+sm.addStudent("Suman");
+sm.addSubject("Suman", "Eng", 85)
+sm.addSubject("Suman", "Maths", 95)
+sm.addSubject("Suman", "Science", 92)
+
+
+sm.getInsights();
 
 
 
