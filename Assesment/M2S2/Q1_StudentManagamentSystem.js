@@ -83,6 +83,16 @@ function createStudentManager() {
         }
       })
       return sDetails;
+    },
+
+    //4 
+    addSubject(name,subject,score){
+      students.forEach((stu) => {
+        if (stu.name === name) {
+          stu.subjects[subject] = score;
+        }
+      })
+      console.log(students)
     }
     
   }
@@ -90,10 +100,14 @@ function createStudentManager() {
 
 let sm = createStudentManager();
 sm.addStudent("Raju");
+sm.addStudent("Rani");
 sm.updateScore("Raju", "Science", 80);
 sm.updateScore("Raju", "Maths", 80);
 
 console.log(sm.getStudentDetails("Raju"))
+
+sm.addSubject("Raju", "Eng", 80)
+sm.addSubject("Rani","Eng",75)
 
 
 
