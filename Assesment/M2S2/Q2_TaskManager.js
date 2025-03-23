@@ -69,6 +69,10 @@ function taskManager(){
 
 let taskMan = taskManager();
 
+//add task
 taskMan.addTask("Presentation");
-
+//get task
+console.log(taskMan.getAllTasks());
+//adding task complete 
+taskMan.markComplete("Presentation");
 console.log(taskMan.getAllTasks());
