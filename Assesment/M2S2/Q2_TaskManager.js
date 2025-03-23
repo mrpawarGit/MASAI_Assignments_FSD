@@ -57,9 +57,9 @@ function taskManager(){
     },
 
     //3
-    markComplete(taskId){
+    markComplete(title){
       task.forEach(task =>{
-        if(task.id == taskId){
+        if(task.title === title){
           task.completed = true;
         }
       })
