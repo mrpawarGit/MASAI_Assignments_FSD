@@ -68,6 +68,9 @@ function taskManager(){
     //4
     removeTask(id){
       task = task.filter((task)=>task.id !== id)
+    }, 
+    sortTask(title){
+      return task.sort((a,b)=>a.title.localeCompare(b));
     }
   }
 }
