@@ -41,3 +41,12 @@ Demonstration of:
 Closures for task data security.
 Higher-Order Functions (HOFs) like .map(), .filter(), and .sort().
 */
+
+function taskManager(){
+  let task = [];
+  let taskId = 1;
+
+  return{
+    
+  }
+}
