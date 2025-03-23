@@ -71,6 +71,7 @@ function createStudentManager(){
       })
       console.log(students)
     }
+    //3
     
   }
 }
