@@ -63,6 +63,11 @@ function taskManager(){
           task.completed = true;
         }
       })
+    },
+
+    //4
+    removeTask(id){
+      task = task.filter((task)=>task.id !== id)
     }
   }
 }
@@ -71,8 +76,14 @@ let taskMan = taskManager();
 
 //add task
 taskMan.addTask("Presentation");
+taskMan.addTask("Dev");
 //get task
 console.log(taskMan.getAllTasks());
 //adding task complete 
 taskMan.markComplete("Presentation");
 console.log(taskMan.getAllTasks());
+
+//remove
+taskMan.removeTask(2)
+console.log(taskMan.getAllTasks());
+
