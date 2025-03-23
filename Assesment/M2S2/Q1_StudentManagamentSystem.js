@@ -54,31 +54,32 @@ Key Requirements
     -.map(), .filter(), .reduce(), and .forEach() for data transformation and insights generation.
 */
 
-function createStudentManager(){
+function createStudentManager() {
   let students = [];
-  return{
+
+  return {
     //1
-    addStudent(name){
-      students.push({name,subjects:{}})
-      console.log(students)
+    addStudent(name) {
+      students.push({ name, subjects: {} });
+      console.log(students);
     },
+
     //2
-    updateScore(name,score,subject){
-      students.forEach((stu)=>{
-        if(stu.name == name){
-          students = students.subjects[subject]=score;
+    updateScore(name, subject, score) {
+      students.forEach((stu) => {
+        if (stu.name === name) {
+          stu.subjects[subject] = score;
         }
-      })
-      console.log(students)
-    }
-    
-  }
+      });
+      console.log(students);
+    },
+  };
 }
 
 let sm = createStudentManager();
 sm.addStudent("Raju");
+sm.updateScore("Raju", "Science", 80);
 
-sm.updateScore("Raju",80,"Science")
 
 
 
