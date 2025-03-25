@@ -69,8 +69,8 @@ function taskManager(){
     removeTask(id){
       task = task.filter((task)=>task.id !== id)
     }, 
-    sortTask(title){
-      return task.sort((a,b)=>a.title.localeCompare(b));
+    sortTask(){
+      return task.sort((a,b)=>a.title.localeCompare(b.title));
     }
   }
 }
@@ -79,6 +79,7 @@ let taskMan = taskManager();
 
 //add task
 taskMan.addTask("Presentation");
+taskMan.addTask("Testing");
 taskMan.addTask("Dev");
 //get task
 console.log(taskMan.getAllTasks());
@@ -89,4 +90,7 @@ console.log(taskMan.getAllTasks());
 //remove
 taskMan.removeTask(2)
 console.log(taskMan.getAllTasks());
+
+//sort
+console.log(taskMan.sortTask())
 
