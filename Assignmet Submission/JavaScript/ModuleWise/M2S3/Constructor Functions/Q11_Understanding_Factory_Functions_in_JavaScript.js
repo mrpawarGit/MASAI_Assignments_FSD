@@ -19,12 +19,12 @@ Output: Hello, I am Alice, working as a Developer.
 
 */
 
-function createEmployee(name, role, salary){
+function createEmployee(name, role, salary) {
   let emp = {}
   emp.name = name
   emp.role = role
   emp.salary = salary
-  emp.introduce = function(){
+  emp.introduce = function () {
     console.log(`Hello, I am ${this.name}, working as a ${this.role}.`)
   }
   return emp
