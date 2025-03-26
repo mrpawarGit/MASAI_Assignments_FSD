@@ -16,9 +16,9 @@ const employee1 = createEmployee("Alice", "Developer", 60000);
 employee1.introduce();
 
 Output: Hello, I am Alice, working as a Developer.
-
 */
 
+//Factory Function
 function createEmployee(name, role, salary) {
   let emp = {}
   emp.name = name
