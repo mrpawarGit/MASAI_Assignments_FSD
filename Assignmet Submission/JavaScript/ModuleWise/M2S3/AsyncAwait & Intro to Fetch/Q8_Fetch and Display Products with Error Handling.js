@@ -46,8 +46,20 @@ async function dispProducts(){
          console.log("Image:",product.image)
       })
       
-      // total price of all products category wise
+      // total price of all products
+      let category = products.reduce((acc,product)=>{
+         acc[product.title] = (acc[product.title]||0) + product.price
+         return acc
+      },{})
+
+      console.log(category)
+
+      //sum of all prices
+      let total = products.reduce((sum,product)=>{
+         return sum += product.price
+      },0)
       
+      console.log("Total:",total.toFixed(2));
       
    }
    catch(error){
