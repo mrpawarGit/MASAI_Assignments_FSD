@@ -16,5 +16,5 @@ fetch('https://jsonplaceholder.typicode.com/users')
   .then(res => {
     res.forEach(user => console.log(user.name));
   })
-  .catch(error => console.error(error));
   //.catch(error => console.log(error));
+  .catch(error => console.error(error));
