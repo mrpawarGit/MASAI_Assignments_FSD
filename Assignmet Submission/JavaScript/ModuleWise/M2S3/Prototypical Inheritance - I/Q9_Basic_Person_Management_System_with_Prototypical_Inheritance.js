@@ -43,3 +43,31 @@ Create an instance of Employee.
 Call introduce on both instances.
 Call work on the Employee instance.
  */
+
+
+function Person(name,age){
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.introduce = function(){
+  console.log(`Hi, my name is ${this.name} and I am ${this.age} years old.`)
+}
+
+function Employee(name,age,jobtitle){
+  Person.call(this,name,age);
+  this.jobtitle = jobtitle;
+}
+
+Employee.prototype.work = function(){
+  console.log(`${this.name} is working as a ${this.jobtitle}.`)
+}
+
+//instance of person
+const person1 = new Person("Ramesh",22);
+console.log(person1)
+person1.introduce();
+
+const emp1 = new Employee("Raju",25,"Developer");
+console.log(emp1)
+emp1.work();

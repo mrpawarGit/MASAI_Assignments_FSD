@@ -47,3 +47,4 @@ Create regular and premium customers.
 Show renting and returning cars, applying discounts, and handling maintenance.
 Use call, apply, and bind where appropriate to demonstrate your understanding.
  */
+
