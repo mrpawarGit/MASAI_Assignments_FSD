@@ -48,3 +48,73 @@ Show renting and returning cars, applying discounts, and handling maintenance.
 Use call, apply, and bind where appropriate to demonstrate your understanding.
  */
 
+function Car(make, model, year, isAvailable = true) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.isAvailable = isAvailable;
+}
+
+function Customer(name) {
+  this.name = name;
+  this.rentedCars = [];
+}
+
+Customer.prototype.rentACar = function (car_obj) {
+  if (car_obj.isAvailable) {
+    car_obj.isAvailable = false;
+    this.rentedCars.push(car_obj);
+    console.log(this.name, "rented", car_obj.model, car_obj.make, "car!");
+  } else {
+    console.log("Sorry, this car is already rented.");
+  }
+};
+
+Customer.prototype.returnCar = function (car_obj) {
+  setTimeout(() => {
+    car_obj.isAvailable = true;
+    this.rentedCars = this.rentedCars.filter((c) => c !== car_obj);
+    console.log("Car", car_obj.make, "-", car_obj.model, "Return Done");
+  }, 2000);
+};
+
+function PremiumCustomer(name, discountRate) {
+  Customer.call(this, name); 
+  this.discountRate = discountRate;
+}
+
+PremiumCustomer.prototype = Object.create(Customer.prototype);
+PremiumCustomer.prototype.constructor = PremiumCustomer;
+
+function calculateRentalPrice(pri_cust){
+  let basePrice = 50;
+  let discount = basePrice * (pri_cust.discountRate / 100);
+  console.log(`BasePrice: ${basePrice},After ${pri_cust.discountRate}% discount, Final Price:${basePrice - discount}`);
+};
+
+function maintenance(car_obj, delay) {
+  setTimeout(() => {
+    car_obj.isAvailable = true;
+    console.log(car_obj.model,car_obj.make,"Maintenance Done")
+  }, delay);
+}
+
+const car1 = new Car("Toyota", "Corolla", 2020);
+const car2 = new Car("Maruti", "Swift", 2022);
+const car3 = new Car("Tata", "Nexon", 2024);
+
+const cust1 = new Customer("Rohan");
+const cust2 = new PremiumCustomer("Soham", 10);
+
+//renting car
+cust1.rentACar(car2);
+cust2.rentACar(car1); 
+
+//calculating rental price after discount for primium customers
+calculateRentalPrice(cust2)
+
+//return car
+cust1.returnCar(car1)
+
+//car maintenance
+maintenance(car1,3000);
