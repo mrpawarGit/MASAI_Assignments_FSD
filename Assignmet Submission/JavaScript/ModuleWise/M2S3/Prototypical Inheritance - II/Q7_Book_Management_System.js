@@ -44,3 +44,26 @@ Imports the array of Book instances from books.js.
 Uses Array.prototype.map to create an array of book summaries by calling the getSummary method on each book.
 Logs the array of book summaries to the console.
  */
+
+
+function Book(title, author, year) {
+  this.title = title;
+  this.author = author;
+  this.year = year;
+}
+
+Book.prototype.getSummary = function() {
+  return `${this.title} by ${this.author}, published in ${this.year}`;
+};
+
+const books = [
+  new Book('Harry Potter', 'JK', 1990),
+  new Book('1999', 'George Orwell', 1959),
+  new Book('Introver', 'Monalisa', 1991),
+  new Book('Baby John', 'Atlee', 2025),
+];
+
+
+const summaries = books.map(book => book.getSummary());
+
+console.log(summaries);

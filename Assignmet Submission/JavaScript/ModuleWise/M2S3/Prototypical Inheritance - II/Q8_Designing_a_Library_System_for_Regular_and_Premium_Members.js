@@ -55,3 +55,84 @@ Create a regular member and a premium member.
 Show borrowing books and the difference in behavior between regular and premium members.
 Use bind to create a bound function for borrowing books for a member.
  */
+
+function Book(title, author, year, isAvailable = true) {
+  this.title = title;
+  this.author = author;
+  this.year = year;
+  this.isAvailable = isAvailable;
+}
+
+function Member(name) {
+  this.name = name;
+  this.borrowedBooks = [];
+}
+
+Member.prototype.borrowBook = function(book) {
+  if (this.borrowedBooks.length >= 3) {
+    console.log(`${this.name} cannot borrow more than 3 books.`);
+    return;
+  }
+
+  if (!book.isAvailable) {
+    console.log(`${book.title} is already borrowed.`);
+    return;
+  }
+
+  book.isAvailable = false;
+  this.borrowedBooks.push(book.title);
+  console.log(`${this.name} borrowed "${book.title}".`);
+};
+
+function PremiumMember(name) {
+  Member.call(this, name);
+  this.specialCollectionAccess = true;
+}
+
+PremiumMember.prototype = Object.create(Member.prototype);
+
+PremiumMember.prototype.borrowBook = function(book) {
+  if (this.borrowedBooks.length >= 5) {
+    console.log(`${this.name} cannot borrow more than 5 books.`);
+    return;
+  }
+
+  if (!book.isAvailable) {
+    console.log(`${book.title} is already borrowed.`);
+    return;
+  }
+
+  book.isAvailable = false;
+  this.borrowedBooks.push(book.title);
+  console.log(`${this.name} borrowed "${book.title}".`);
+
+  if (this.specialCollectionAccess) {
+    console.log(`${this.name} has access to special collection books.`);
+  }
+};
+
+const book1 = new Book('Harry Potter', 'JK', 1990);
+const book2 = new Book('1999', 'George Orwell', 1959);
+const book3 = new Book('Introver', 'Monalisa', 1991);
+const book4 = new Book('Baby John', 'Atlee', 2025);
+const book5 = new Book('The Hobbit', 'J.R.R.', 1930);  
+const book6 = new Book('Catcher', 'D.D.', 2010);  
+
+const regularMember = new Member('John Doe');
+const premiumMember = new PremiumMember('Jane Smith');
+
+regularMember.borrowBook(book1);
+regularMember.borrowBook(book2);
+regularMember.borrowBook(book3);
+regularMember.borrowBook(book4);
+
+premiumMember.borrowBook(book1);
+premiumMember.borrowBook(book2);
+premiumMember.borrowBook(book3);
+premiumMember.borrowBook(book4);
+premiumMember.borrowBook(book5);
+premiumMember.borrowBook(book6);
+premiumMember.borrowBook(book1);
+
+const borrowBookForJohn = regularMember.borrowBook.bind(regularMember);
+borrowBookForJohn(book4);
