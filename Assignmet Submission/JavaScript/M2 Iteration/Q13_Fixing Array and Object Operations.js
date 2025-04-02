@@ -70,19 +70,19 @@ const library = {
       return;
     }
     this.books.push(book);
-    console.log(`Book "${book.title}" added successfully.`);
+    console.log(`Book: "${book.title}" added successfully.`);
   },
 
   findBookByTitle(title) {
     const foundBook = this.books.find((book) => book.title === title);
-    return foundBook || `Book with title "${title}" not found.`;
+    return foundBook || `Book: "${title}" not found.`;
   },
 
   removeBook(title) {
     const index = this.books.findIndex((book) => book.title === title);
     if (index !== -1) {
       const removedBook = this.books.splice(index, 1);
-      console.log(`Book "${removedBook[0].title}" removed successfully`);
+      console.log(`Book: "${removedBook[0].title}" removed successfully`);
     } else {
       console.log(`"${title}" not found.`);
     }
@@ -92,7 +92,7 @@ const library = {
 library.addBook({ title: "1984", author: "George Orwell", year: 1949 });
 console.log(`Total books in library: ${library.books.length}`);
 
-library.removeBook("The Hobbit");
+library.removeBook("1984");
 console.log(`Total books in library: ${library.books.length}`);
 
 
