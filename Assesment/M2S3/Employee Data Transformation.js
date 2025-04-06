@@ -63,3 +63,35 @@ All rented vehicles: [
   }
 ]
  */
+
+function transformsEmployeeData(employees,threshold){
+  return employees
+    //1
+    .filter(emp => emp.salary>threshold)
+    //2
+    .map(emp =>{
+      return({
+        name:emp.name,
+        revisedSalary:(emp.salary * 1.10).toFixed(0),
+        experience:emp.experience
+      })
+    })
+    //3
+    .sort((a,b)=>{
+      return b.experience - a.experience
+    })
+
+}
+
+
+let employees = [
+  { id: 1, name: "Alice", salary: 50000, experience: 3, department: "Engineering" },
+  { id: 2, name: "Bob", salary: 75000, experience: 5, department: "Sales" },
+  { id: 3, name: "Charlie", salary: 60000, experience: 2, department: "Marketing" },
+  { id: 4, name: "Dave", salary: 45000, experience: 1, department: "Engineering" },
+  { id: 5, name: "Eve", salary: 85000, experience: 7, department: "Engineering" }
+]
+
+let threshold = 55000;
+
+console.log(transformsEmployeeData(employees,threshold))
