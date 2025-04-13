@@ -1,6 +1,6 @@
 body{
-  font-family: Arial, Helvetica, sans-serif;
-  background: rgb(247, 246, 228);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: rgb(248, 247, 240);
   color: rgb(31, 31, 31);
 }
 
@@ -11,16 +11,17 @@ h3{
   color: rgb(49, 49, 167);
 }
 
-table{
-  width: 50%;
+
+table {
+  width: 100%;
   border-collapse: collapse;
-  border-color: brown;
-  caption-side: bottom;
-  border-width: 2px;
+  display: block;
 }
 
-tr,td,th{
-  border-width: 2px;
+th,td{
+  border: 3px solid brown;
+  padding: 8px;
+  text-align: left;
 }
 
 input[type="submit"]:hover{
@@ -29,11 +30,22 @@ input[type="submit"]:hover{
 
 
 #qz{
-  color: rgb(158, 68, 3);
+  color: rgb(88, 38, 2);
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: large;
-  font-style: oblique;
 }
+
+footer {
+  text-align: center;
+  background-color: #b9ccf9;
+  padding: 8px;
+  font-weight: bold;
+}
+
+img:hover{
+  border-style: solid;
+}
+
 
 
 
