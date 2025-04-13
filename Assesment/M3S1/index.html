@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- 1 -->
   <meta charset="UTF-8">
@@ -8,11 +9,124 @@
   <meta name="description" content="How the Internet Works using HTML & CSS">
   <title>How the Internet Works using HTML & CSS</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    header {
+      text-align: center;
+      background-color: rgb(0, 162, 255);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 50px;
+    }
+  </style>
 </head>
+
 <body>
-  <header>"How the Internet Works" using HTML & CSS.</header>
+  <header>How the Internet Works</header>
   <section>
     <h2>Client & Server communication.</h2>
+    <p>Client-server communication is a fundamental network model where clients request services or data from servers,
+      which then respond. This interaction is based on a request-response pattern. </p>
   </section>
+
+  <img
+    src="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview/basic_static_app_server.png"
+    alt="Client Server">
+  <article>
+    <h2>The Journey of a Web Request (from browser to server).</h2>
+    <!--List ordered and Unorderd-->
+    <ol>
+      <li>Entering the Web Address</li>
+      <li>Resolving the Domain Name</li>
+      <li>Establishing a Connection</li>
+      <li>Server Responds</li>
+      <li>Rendering the Page</li>
+      <li>Continuous Communication</li>
+
+    </ol>
+
+    <!--Table-->
+    <h3>Comparison</h3>
+    <table border="1">
+      <caption>Client vs Server</caption>
+      <tr>
+        <th>Client</th>
+        <th>Server</th>
+      </tr>
+
+      <tr>
+        <td>Requsets Data</td>
+        <td>Responds Data</td>
+      </tr>
+      <tr>
+        <td>Ex: Laptop, Web Browser, etc</td>
+        <td>Ex: Database Server, Web Server, etc</td>
+      </tr>
+    </table>
+    <br>
+    <table border="1">
+      <caption>Static vs Dynamic Websites</caption>
+      <tr>
+        <th>Static</th>
+        <th>Dynamic</th>
+      </tr>
+      <tr>
+        <td>Content is Fixed</td>
+        <td>Content changes per request</td>
+      </tr>
+      <tr>
+        <td>Not Responsive</td>
+        <td>Responsive</td>
+      </tr>
+    </table>
+    <br>
+    <!--4 Images, Videos, and Maps-->
+    <h3>How Internet Works</h3>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/sMHzfigUxz4?si=AiMuQ362F0AJHAIq"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <br>
+
+    <h3>Location of major internet data center</h3>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9433078425604!2d77.62969487484028!3d12.911365287398523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1525f3226a65%3A0x9d0c72b3bd41f2ef!2sMasai%20School!5e0!3m2!1sen!2sin!4v1744528850629!5m2!1sen!2sin"
+      width="560" height="315" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </article>
+  <br>
+  <aside>
+    <h4>Quick facts and tips.</h4>
+    <ul>
+      <li>HTTP - Hypertext Transfer Protocol</li>
+      <li>URL - Uniform Resource Locator</li>
+      <li>DNS - Domain Name System </li>
+      <li>TCP/IP - Transmission Control Protocol/Internet Protocol </li>
+    </ul>
+  </aside>
+  <br>
+  <section id="quiz">
+    <h3>Interactive Quiz</h3>
+    <form action="">
+      <p>HTTP Stands for ?</p>
+      <input type="radio" id="a1" name="q1" value="Hypertext Transmission Protocol">
+      <label for="a1">Hypertext Transmission Protocol</label>
+      <br>
+      <input type="radio" id="a2" name="q2" value="Hyperloop Transmission Protected">
+      <label for="a2">Hyperloop Transmission Protected</label>
+      <br>
+
+      <p>Feedback:</p>
+      <input type="text"> <input type="submit" value="Submit">
+    </form>
+
+  </section>
+
+  <br>
+  <footer>
+    Page by Mayur. Read article by MDN <a target="_blank"
+      href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works">Click
+      Here</a>
+  </footer>
 </body>
+
 </html>
