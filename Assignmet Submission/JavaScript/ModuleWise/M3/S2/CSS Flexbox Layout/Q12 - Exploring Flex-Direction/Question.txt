@@ -1,0 +1,15 @@
+Q: 12
+Title:
+L0 - Exploring Flex-Direction
+
+Problem Statement:
+Create a Flexbox layout with a container holding four items. The layout should demonstrate the use of the flex-direction property.
+
+Requirements:
+
+1.Initially, arrange the items in a row.
+2.Change the layout to arrange the items in a column using flex-direction: column.
+3.Add comments in your CSS explaining how flex-direction affects the layout.
+
+Submission Guidelines:
+Submit the link to your Masai Git repository containing the HTML and CSS files.

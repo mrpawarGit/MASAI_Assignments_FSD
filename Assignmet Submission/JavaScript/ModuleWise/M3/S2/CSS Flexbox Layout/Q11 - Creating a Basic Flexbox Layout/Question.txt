@@ -1,0 +1,15 @@
+Q: 11
+Title:
+L0 - Creating a Basic Flexbox Layout
+
+Problem Statement:
+You are tasked with creating a simple webpage that demonstrates the core principles of Flexbox. Using a container and three items, arrange the items horizontally and align them to the center of the container (both horizontally and vertically).
+
+Requirements:
+
+1.Use display: flex on the container to enable Flexbox.
+2.Center the items horizontally using justify-content.
+3.Center the items vertically using align-items.
+
+Submission Guidelines:
+Submit the link to your Masai Git repository containing the HTML and CSS files.
