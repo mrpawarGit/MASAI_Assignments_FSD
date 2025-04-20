@@ -1,0 +1,22 @@
+.block-element {
+  display: block;
+  background-color: lightblue;
+}
+
+.inline-element {
+  display: inline;
+  background-color: rgb(69, 108, 224);
+}
+
+.inline-block-element {
+  display: inline-block;
+  width: 150px;
+  height: 70px;
+  background-color: rgb(232, 61, 61);
+}
+
+.hidden-element {
+  display: none;
+  background-color: lightgray;
+}
+
