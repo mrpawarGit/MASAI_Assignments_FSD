@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #e9e9e9;
+  /* Initially, arrange items in a row */
+  flex-direction: row;
+}
+
+.item {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+/* Change layout to a column */
+.container-column {
+  /* This will change the layout from row to column */
+  flex-direction: column;
+}
