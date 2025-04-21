@@ -1,0 +1,19 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 1rem;
+  margin: 0;
+}
+
+.content {
+  max-width: 700px;
+  margin: auto;
+  color: #333;
+}
+
+@media (min-width: 600px) {
+  body {
+    font-size: 16px;
+  }
+}
