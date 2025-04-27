@@ -1,0 +1,33 @@
+/* 1 */
+article:nth-of-type(even) {
+  background-color: rgb(137, 167, 238);
+}
+
+/* 2 */
+article p:last-of-type {
+  font-style: italic;
+}
+
+/* 3 */
+article section>:first-child {
+  font-weight: bold;
+}
+
+/* 4 */
+p:empty{
+  visibility: hidden;
+}
+
+/* 5 */
+article:has(img) h1 {
+  border: 2px solid;
+}
+
+/* 6 */
+footer a {
+  color: red;
+}
+
+footer>div>p {
+  display: inline-block;
+}
