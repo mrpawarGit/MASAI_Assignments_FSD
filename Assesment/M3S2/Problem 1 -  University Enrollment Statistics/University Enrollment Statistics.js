@@ -60,7 +60,7 @@ function deptWithMaxStudents(departments) {
 function lessStudentDept(departments) {
   let arr = [];
   departments.forEach(ele => {
-    if(ele.students.length<30){
+    if (ele.students.length < 30) {
       arr.push(ele.departmentName)
     }
   })
@@ -68,7 +68,7 @@ function lessStudentDept(departments) {
   console.log(`Departments with less than 30 students: ${arr}`)
 }
 
-
+//calling functions
 studentCount(departments)
 deptWithMaxStudents(departments)
 lessStudentDept(departments)
