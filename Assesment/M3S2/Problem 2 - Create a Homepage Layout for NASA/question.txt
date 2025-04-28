@@ -1,0 +1,6 @@
+Problem 2: Create a Homepage Layout for NASA
+Create a replica of NASA’s homepage layout: https://www.nasa.gov/
+
+Focus on the navbar, hero images, latest news section, and footer.
+
+Use placeholder text and images if needed.
