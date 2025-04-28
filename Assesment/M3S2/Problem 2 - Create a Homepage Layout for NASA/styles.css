@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.logo img {
+  width: 80px;
+  text-align: center;
+
+}
+
+.nav-left input {
+  padding: 5px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-links select,
+.nav-links a,
+#live-btn {
+  background: none;
+  color: white;
+  border: 1px solid white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#live-btn {
+  background-color: red;
+  border: none;
+}
+
+.hero {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+.hero-content {
+  background-image: url("https://www.nasa.gov/wp-content/uploads/2025/04/ngc-2899.jpg?resize=2000,1997");
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-link {
+  background: red;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+footer {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1rem;
+}
