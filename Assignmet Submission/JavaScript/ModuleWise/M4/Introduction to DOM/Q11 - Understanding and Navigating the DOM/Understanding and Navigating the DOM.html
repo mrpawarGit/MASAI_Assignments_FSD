@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Understanding and Navigating the DOM</title>
 </head>
+
 <body>
-  
+  <div class="container">
+    <h1 id="h1">Html World!</h1>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis nam, odit earum expedita, beatae eos
+      nesciunt ipsum natus quas amet, laborum officia totam tenetur? Nemo nisi iste distinctio ratione aperiam.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, quaerat harum? Velit natus aperiam sit expedita ut vero maiores minus optio, totam, consequuntur, unde placeat. Magnam numquam reprehenderit tenetur repellendus?
+    </p>
+  </div>
 </body>
+
 </html>
+
+<script>
+  // 1
+  let h1 = document.querySelector("#h1");
+  h1.textContent = "Welcome to the DOM World!"
+
+  // 2
+  let p = document.getElementsByTagName("p");
+  for(let i of p){
+    i.style.color = "blue"
+  }
+
+  // 3 
+  let div = document.querySelector(".container");
+  div.style.backgroundColor = "yellow"
+</script>
