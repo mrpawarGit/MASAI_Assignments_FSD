@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic To-Do List with Event Handling</title>
+  <style>
+    ul > li > input[type="checkbox"] {
+      margin-right: 10px; 
+    }
+    ul > li > button {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="input-txt" placeholder="Enter Task">
+  <button id="add-task-btn">Add Task</button>
+  <ul id="task-list"></ul>
+
+  <script>
+    let inputTxt = document.querySelector('#input-txt');
+    let addTaskBtn = document.querySelector('#add-task-btn');
+    let ul = document.querySelector('#task-list');
+
+    addTaskBtn.addEventListener('click', () => {
+      let text = inputTxt.value.trim();
+      if (text) {
+        let li = document.createElement('li');
+
+        let checkBox = document.createElement('input');
+        checkBox.type = 'checkbox';
+
+        let taskText = document.createElement('span');
+        taskText.textContent = text;
+
+        let deleteBtn = document.createElement('button');
+        deleteBtn.textContent = "Delete";
+
+        li.appendChild(checkBox);
+        li.appendChild(taskText);
+        li.appendChild(deleteBtn);
+
+        //append
+        ul.appendChild(li);
+
+        inputTxt.value = '';
+
+        deleteBtn.addEventListener('click', () => {
+          ul.removeChild(li);
+        });
+
+        checkBox.addEventListener('change', () => {
+          taskText.style.textDecoration = checkBox.checked ? 'line-through' : 'none';
+        });
+      }
+      else {
+        alert("Enter a task");
+      }
+    });
+  </script>
+</body>
+
+</html>
