@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive DOM Manipulation</title>
 </head>
+
 <body>
-  
+  <div id="txt">
+    Hello World!
+  </div><br>
+
+  <input type="text" placeholder="Enter color" id="input-color">
+  <button id="clr-btn"><label for="clr-btn">Change Background</label></button><br><br>
+
+  <input type="text" placeholder="Enter Text" id="input-text">
+  <button id="update-btn">Update Text</button>
 </body>
+
 </html>
+
+<script>
+  let div = document.querySelector("#txt")
+  let colorBox = document.querySelector("#input-color")
+  let bgmBtn = document.querySelector('#clr-btn')
+  let textBox = document.querySelector('#input-text')
+  let textBtn = document.querySelector('#update-btn')
+
+  bgmBtn.addEventListener('click', () => {
+    let color = colorBox.value;
+    div.style.backgroundColor = color; 
+  })
+
+  textBtn.addEventListener('click', () => {
+    let text = textBox.value;
+    div.textContent = text;
+  })
+
+</script>
