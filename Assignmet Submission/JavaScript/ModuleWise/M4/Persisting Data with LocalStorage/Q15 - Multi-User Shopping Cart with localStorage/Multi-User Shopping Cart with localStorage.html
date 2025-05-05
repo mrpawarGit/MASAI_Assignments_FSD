@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-User Shopping Cart</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    input, button { margin: 5px; }
+    #cart { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<h1>Shopping Cart</h1>
+
+<div>
+  <label for="username">Username:</label>
+  <input type="text" id="username">
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="cart" style="display: none;">
+  <h2>Cart</h2>
+  <div>
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName">
+    <label for="itemPrice">Price:</label>
+    <input type="number" id="itemPrice">
+    <label for="itemQuantity">Quantity:</label>
+    <input type="number" id="itemQuantity">
+    <button onclick="addItem()">Add Item</button>
+  </div>
+
+  <ul id="cartItems"></ul>
+  <h3>Total: $<span id="totalCost">0</span></h3>
+</div>
+
+<script>
+  let currentUser = null;
+
+  function login() {
+    const username = document.getElementById("username").value;
+    if (username) {
+      currentUser = username;
+      document.getElementById("username").disabled = true;
+      document.querySelector("button").disabled = true;
+      document.getElementById("cart").style.display = "block";
+      loadCart();
+    }
+  }
+
+  function loadCart() {
+    const carts = JSON.parse(localStorage.getItem("carts")) || {};
+    if (carts[currentUser]) {
+      displayCart(carts[currentUser]);
+    } else {
+      carts[currentUser] = [];
+      localStorage.setItem("carts", JSON.stringify(carts));
+    }
+  }
+
+  function displayCart(cart) {
+    const cartItems = document.getElementById("cartItems");
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `${item.itemName} - $${item.price} x ${item.quantity} = $${item.price * item.quantity} <button onclick="removeItem(${index})">Remove</button> <button onclick="editItem(${index})">Edit</button>`;
+      cartItems.appendChild(li);
+      total += item.price * item.quantity;
+    });
+    document.getElementById("totalCost").textContent = total;
+  }
+
+  function addItem() {
+    const itemName = document.getElementById("itemName").value;
+    const itemPrice = parseFloat(document.getElementById("itemPrice").value);
+    const itemQuantity = parseInt(document.getElementById("itemQuantity").value);
+    if (itemName && itemPrice > 0 && itemQuantity > 0) {
+      const carts = JSON.parse(localStorage.getItem("carts"));
+      const cart = carts[currentUser];
+      cart.push({ itemName, price: itemPrice, quantity: itemQuantity });
+      localStorage.setItem("carts", JSON.stringify(carts));
+      displayCart(cart);
+    }
+  }
+
+  function removeItem(index) {
+    const carts = JSON.parse(localStorage.getItem("carts"));
+    const cart = carts[currentUser];
+    cart.splice(index, 1);
+    localStorage.setItem("carts", JSON.stringify(carts));
+    displayCart(cart);
+  }
+
+  function editItem(index) {
+    const newQuantity = prompt("Enter new quantity:");
+    if (newQuantity > 0) {
+      const carts = JSON.parse(localStorage.getItem("carts"));
+      const cart = carts[currentUser];
+      cart[index].quantity = parseInt(newQuantity);
+      localStorage.setItem("carts", JSON.stringify(carts));
+      displayCart(cart);
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Todo List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+    }
+
+    #task-input,
+    #search-input {
+      width: 30%;
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    #task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #task-list li.completed {
+      text-decoration: line-through;
+      background-color: rgb(153, 151, 151);
+    }
+
+    #task-list li button {
+      margin-left: 10px;
+    }
+
+    #task-list li {
+      padding: 10px;
+      margin-bottom: 7px;
+      background-color: rgb(226, 223, 223);
+      border: 1px solid;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Enhanced Todo List</h1>
+
+  <input type="text" id="search-input" placeholder="Search tasks..." onkeyup="filterTasks()">
+  <input type="text" id="task-input" placeholder="Add new task">
+  <button onclick="addTask()">Add Task</button>
+
+  <ul id="task-list"></ul>
+
+</body>
+
+</html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', loadTasks);
+
+  function loadTasks() {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    displayTasks(tasks);
+  }
+
+  function addTask() {
+    let taskInput = document.getElementById('task-input');
+    let taskText = taskInput.value.trim();
+
+    if (taskText === '') {
+      alert('Please enter a task.');
+      return;
+    }
+
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let newTask = {
+      id: Date.now(),
+      text: taskText,
+      completed: false
+    };
+
+    tasks.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    displayTasks(tasks);
+    taskInput.value = '';
+  }
+
+  function displayTasks(tasks) {
+    let taskList = document.getElementById('task-list');
+    taskList.innerHTML = '';
+
+    tasks.forEach(task => {
+      let li = document.createElement('li');
+      li.className = task.completed ? 'completed' : '';
+      li.innerHTML = `
+        <span>${task.text}</span>
+        <button onclick="toggleComplete(${task.id})">${task.completed ? 'Undo' : 'Complete'}</button>
+        <button onclick="removeTask(${task.id})">Remove</button>
+      `;
+      taskList.appendChild(li);
+    });
+  }
+
+  function toggleComplete(taskId) {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks = tasks.map(task =>
+      task.id === taskId ? { ...task, completed: !task.completed } : task
+    );
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    displayTasks(tasks);
+  }
+
+  function removeTask(taskId) {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks = tasks.filter(task => task.id !== taskId);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    displayTasks(tasks);
+  }
+
+  function filterTasks() {
+    let searchInput = document.getElementById('search-input').value.toLowerCase();
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let filteredTasks = tasks.filter(task =>
+      task.text.toLowerCase().includes(searchInput)
+    );
+    displayTasks(filteredTasks);
+  }
+</script>

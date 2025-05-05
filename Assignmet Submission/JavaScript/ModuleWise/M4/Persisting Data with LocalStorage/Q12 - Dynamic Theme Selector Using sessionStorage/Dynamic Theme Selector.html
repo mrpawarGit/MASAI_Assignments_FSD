@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Theme Selector</title>
+  <style>
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      margin: 20px;
+    }
+
+    #themeSelector {
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Choose a Theme</h1>
+
+  <select id="themeSelector">
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+    <option value="blue">Blue</option>
+  </select>
+
+  <script>
+    // change theme
+    document.getElementById("themeSelector").addEventListener("change", function () {
+      let selectedTheme = this.value;
+      applyTheme(selectedTheme);
+      sessionStorage.setItem("selectedTheme", selectedTheme);
+    });
+
+    //fn for theme
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+      } else if (theme === "blue") {
+        document.body.style.backgroundColor = "blue";
+        document.body.style.color = "black";
+      } else {
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = "black";
+      }
+    }
+
+    // default - onload
+    window.onload = function () {
+      let savedTheme = sessionStorage.getItem("selectedTheme");
+
+      if (savedTheme) {
+        applyTheme(savedTheme);
+        document.getElementById("themeSelector").value = savedTheme;
+      }
+    };
+
+  </script>
+
+</body>
+
+</html>
