@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traversing the DOM: Parent and Sibling Navigation</title>
+</head>
+
+<body>
+  <div id="container">
+    <ul id="list">
+      <li id="item1">Item 1</li>
+      <li id="item2">Item 2</li>
+      <li id="item3">Item 3</li>
+    </ul>
+  </div>
+</body>
+
+</html>
+
+<script>
+  
+  let item2 = document.getElementById("item2");
+
+  // click event
+  item2.addEventListener("click", () => {
+    const parent = item2.parentNode;
+
+    alert(parent.textContent);
+
+    let prevSibling = item2.previousElementSibling;
+    let nextSibling = item2.nextElementSibling;
+
+    if (prevSibling) {
+      console.log("Previous sibling text:", prevSibling.textContent);
+    }
+
+    if (nextSibling) {
+      console.log("Next sibling text:", nextSibling.textContent);
+    }
+  });
+
+</script>

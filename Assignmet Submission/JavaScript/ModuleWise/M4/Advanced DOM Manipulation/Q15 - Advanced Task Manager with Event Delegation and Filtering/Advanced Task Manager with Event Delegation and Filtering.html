@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Task Manager with Event Delegation and Filtering</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    input,
+    button {
+      margin: 5px;
+      padding: 5px 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Task Manager</h1>
+
+  <input id="taskInput" type="text" placeholder="Enter new task" />
+  <button id="addTask">Add Task</button>
+  <button id="sortTasks">Sort Tasks (A-Z)</button>
+
+  <div>
+    <button id="filterAll">All Tasks</button>
+    <button id="filterCompleted">Completed</button>
+    <button id="filterIncomplete">Incomplete</button>
+  </div>
+
+  <ul id="taskList"></ul>
+
+  <div id="taskCounter"></div>
+</body>
+
+</html>
+
+<script>
+  let taskInput = document.getElementById("taskInput");
+  let addTaskBtn = document.getElementById("addTask");
+  let taskList = document.getElementById("taskList");
+  let filterAll = document.getElementById("filterAll");
+  let filterCompleted = document.getElementById("filterCompleted");
+  let filterIncomplete = document.getElementById("filterIncomplete");
+  let taskCounter = document.getElementById("taskCounter");
+  let sortBtn = document.getElementById("sortTasks");
+
+  let tasks = [];
+  let currentFilter = "all";
+
+  // render tasks
+  function renderTasks() {
+    taskList.innerHTML = "";
+
+    let filteredTasks = tasks;
+
+    if (currentFilter === "completed") {
+      filteredTasks = tasks.filter(task => task.completed);
+    } else if (currentFilter === "incomplete") {
+      filteredTasks = tasks.filter(task => !task.completed);
+    }
+
+    filteredTasks.forEach((task, index) => {
+      const li = document.createElement("li");
+      li.dataset.index = index;
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = task.completed;
+      checkbox.className = "toggle";
+
+      const span = document.createElement("span");
+      span.textContent = task.text;
+      if (task.completed) {
+        span.style.textDecoration = "line-through";
+      }
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.className = "delete";
+
+      li.appendChild(checkbox);
+      li.appendChild(span);
+      li.appendChild(deleteBtn);
+
+      taskList.appendChild(li);
+    });
+
+    updateCounter();
+  }
+
+  // Add new task
+  addTaskBtn.addEventListener("click", () => {
+    const text = taskInput.value.trim();
+    if (text === "") return;
+
+    tasks.push({ text, completed: false });
+    taskInput.value = "";
+    renderTasks();
+  });
+
+  // Sort tasks 
+  sortBtn.addEventListener("click", () => {
+    tasks.sort((a, b) => a.text.localeCompare(b.text));
+    renderTasks();
+  });
+
+  // delete and toggle
+  taskList.addEventListener("click", (e) => {
+    const li = e.target.closest("li");
+    if (!li) return;
+
+    const index = parseInt(li.dataset.index);
+
+    if (e.target.classList.contains("delete")) {
+      tasks.splice(index, 1);
+    } else if (e.target.classList.contains("toggle")) {
+      tasks[index].completed = e.target.checked;
+    }
+
+    renderTasks();
+  });
+
+  // Filter buttons
+  filterAll.addEventListener("click", () => {
+    currentFilter = "all";
+    renderTasks();
+  });
+
+  filterCompleted.addEventListener("click", () => {
+    currentFilter = "completed";
+    renderTasks();
+  });
+
+  filterIncomplete.addEventListener("click", () => {
+    currentFilter = "incomplete";
+    renderTasks();
+  });
+
+  // Update task 
+  function updateCounter() {
+    const total = tasks.length;
+    const completed = tasks.filter(task => task.completed).length;
+    const incomplete = total - completed;
+
+    taskCounter.textContent = `Total: ${total} | Completed: ${completed} | Incomplete: ${incomplete}`;
+  }
+
+</script>

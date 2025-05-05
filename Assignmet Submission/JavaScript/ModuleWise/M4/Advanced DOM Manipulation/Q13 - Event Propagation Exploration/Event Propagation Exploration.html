@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Propagation Exploration</title>
+  <style>
+    .box {
+      padding: 30px;
+      margin: 10px;
+      border: 2px solid black;
+    }
+
+    .outer {
+      background-color: lightcoral;
+    }
+
+    .middle {
+      background-color: lightblue;
+    }
+
+    .inner {
+      background-color: lightgreen;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box outer" id="outerDiv">
+    Outer Div
+    <div class="box middle" id="middleDiv">
+      Middle Div
+      <div class="box inner" id="innerDiv">
+        Inner Div
+        <button id="innerBtn">Inner Button</button>
+      </div>
+      <button id="middleBtn">Middle Button</button>
+    </div>
+    <button id="outerBtn">Outer Button</button>
+  </div>
+</body>
+
+</html>
+
+<script>
+  // Function to handle event alerts
+  function handleEvent(phase, elementName) {
+    return function (event) {
+      alert(`${phase} - ${elementName}`);
+    };
+  }
+
+  let outerDiv = document.getElementById("outerDiv");
+  let middleDiv = document.getElementById("middleDiv");
+  let innerDiv = document.getElementById("innerDiv");
+
+  let outerBtn = document.getElementById("outerBtn");
+  let middleBtn = document.getElementById("middleBtn");
+  let innerBtn = document.getElementById("innerBtn");
+
+  outerDiv.addEventListener("click", handleEvent("Bubbling", "Outer Div"));
+  outerDiv.addEventListener("click", handleEvent("Capturing", "Outer Div"), true);
+
+  middleDiv.addEventListener("click", handleEvent("Bubbling", "Middle Div"));
+  middleDiv.addEventListener("click", handleEvent("Capturing", "Middle Div"), true);
+
+  innerDiv.addEventListener("click", handleEvent("Bubbling", "Inner Div"));
+  innerDiv.addEventListener("click", handleEvent("Capturing", "Inner Div"), true);
+
+  outerBtn.addEventListener("click", handleEvent("Bubbling", "Outer Button"));
+  outerBtn.addEventListener("click", handleEvent("Capturing", "Outer Button"), true);
+
+  middleBtn.addEventListener("click", handleEvent("Bubbling", "Middle Button"));
+  middleBtn.addEventListener("click", handleEvent("Capturing", "Middle Button"), true);
+
+  innerBtn.addEventListener("click", function (event) {
+    alert("Inner Button Clicked - Bubbling");
+    // Stopping event
+    event.stopPropagation();
+  });
+  innerBtn.addEventListener("click", function () {
+    alert("Inner Button Clicked - Capturing");
+  }, true);
+
+</script>
