@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Search Page</title>
+  <style>
+    .product-card {
+      border: 1px solid;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Search Products</h2>
+  <select id="category">
+    <option value="">All Categories</option>
+    <option value="electronics">Electronics</option>
+    <option value="clothing">Clothing</option>
+    <option value="books">Books</option>
+  </select>
+  <input type="number" placeholder="Enter Min Price" id="minPrice">
+  <input type="number" placeholder="Enter Max Price" id="maxPrice">
+  <button onclick="loadData()">Search</button>
+  <div id="container"></div>
+
+  <script>
+
+    async function loadData() {
+      let category = document.getElementById("category").value;
+      let minPrice = document.getElementById("minPrice").value;
+      let maxPrice = document.getElementById("maxPrice").value;
+      let container = document.getElementById("container")
+
+      container.innerHTML = "";
+
+      let res = await fetch("https://681ba69917018fe5057c55d5.mockapi.io/v1/products")
+
+      let data = await res.json();
+      //console.log(data)
+
+      let result = data.filter(product => {
+        let matchCategory = category ? product.category?.toLowerCase() === category.toLowerCase() : true;
+        let matchMin = minPrice ? +product.price >= minPrice : true;
+        let matchMax = maxPrice ? +product.price <= maxPrice : true;
+
+        return matchCategory && matchMax && matchMin;
+      });
+
+      result.forEach(product => {
+        let card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <h4>${product.name}</h4>
+          <p>Price: $${product.price}</p>
+        `;
+
+        container.appendChild(card)
+      })
+    }
+  </script>
+</body>
+
+</html>
