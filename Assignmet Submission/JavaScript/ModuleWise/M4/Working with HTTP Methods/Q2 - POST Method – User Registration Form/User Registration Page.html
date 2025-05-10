@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration Form</title>
+  <style>
+    .container {
+      max-width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f2f2f2;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    input {
+      display: block;
+      width: 90%;
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+
+    button {
+      padding: 10px;
+      width: 96%;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .required {
+      color: blue;
+    }
+
+    .exits {
+      color: red;
+    }
+
+    .sucesess {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Registration Form</h2>
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
+    <input type="password" id="password" placeholder="Enter Password"><br>
+    <button onclick="submitForm()">Submit</button>
+    <div id="message"></div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  async function submitForm() {
+    let name = document.getElementById("name").value
+    let email = document.getElementById("email").value
+    let password = document.getElementById("password").value
+    let message = document.getElementById("message")
+
+    message.textContent = ""
+
+    if (!name || !email || !password) {
+      message.textContent = "Please fill all fields"
+      message.className = 'required'
+      return
+    }
+
+    try {
+      //checking if data/email is present or not
+      let res = await fetch('https://681fa46472e59f922ef6c7cc.mockapi.io/database/users')
+      let users = await res.json()
+
+      let emailExists = false
+      users.forEach((user) => { if (user.email === email) emailExists = true })
+      if (emailExists) {
+        message.textContent = "Email Already Exits!"
+        message.className = 'exits'
+        return
+      }
+
+      //adding new data
+      let newRes = await fetch('https://681fa46472e59f922ef6c7cc.mockapi.io/database/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, email, password
+        })
+      })
+
+      //let data = await newRes.json();
+      message.textContent = `User ${name} Register Succesfully`
+      message.className = 'sucesess'
+
+      //claering feilds
+      document.getElementById("name").value = ""
+      document.getElementById("email").value = ""
+      document.getElementById("password").value = ""
+
+
+    }
+    catch (error) {
+      message.textContent = error.message;
+    }
+  }
+</script>
