@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard</title>
+  <style>
+    .user-item {
+      margin: 5px 0;
+      padding: 8px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Registered Users</h2>
+  
+  <h2>Add New User</h2>
+  <form id="userForm">
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <button type="submit">Add User</button>
+  </form>
+  <div class="user-list" id="userList"></div>
+  <div class="error" id="errorMsg"></div>
+
+  <script>
+    const API_URL = 'https://6821ead1b342dce8004c5676.mockapi.io/v1/users';
+    const userList = document.getElementById('userList');
+    const userForm = document.getElementById('userForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // fetch
+    async function fetchUsers() {
+      try {
+        let res = await fetch(API_URL);
+        let users = await res.json();
+        userList.innerHTML = '';
+        users.forEach(user => {
+          let div = document.createElement('div');
+          div.className = 'user-item';
+          div.textContent = `${user.name} - ${user.email}`;
+          userList.appendChild(div);
+        });
+      } catch (err) {
+        errorMsg.textContent = 'Failed to load users.';
+      }
+    }
+
+    // POST
+    userForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      errorMsg.textContent = '';
+
+      if (!name || !email) {
+        errorMsg.textContent = 'Name and Email are required.';
+        return;
+      }
+
+      try {
+        // Check for duplicate email
+        const existingUsers = await fetch(API_URL).then(res => res.json());
+        if (existingUsers.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+          errorMsg.textContent = 'User with this email already exists.';
+          return;
+        }
+
+        // POST new user
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email })
+        });
+
+        userForm.reset();
+        fetchUsers();
+      } catch (err) {
+        errorMsg.textContent = 'Failed to add user.';
+      }
+    });
+
+    // Load users on page load
+    fetchUsers();
+  </script>
+</body>
+
+</html>
