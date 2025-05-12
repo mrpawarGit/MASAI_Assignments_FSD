@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to Firebase Realtime Database</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<h2>User Data</h2>
+<table id="userTable" border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    <!-- data here -->
+
+  </tbody>
+</table>
+
+<div class="err" id="err"></div>
+
+
+<script>
+  const API_URL = `https://userdb-1a783-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`;
+
+  const tbody = document.getElementById('tbody');
+  const msg = document.getElementById('err');
+
+  async function fetchUser() {
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      tbody.innerHTML = '';
+      // Convert to array and render
+      let newArr = []
+      for (let key in data) {
+        newArr.push({ id: key, ...data[key] })
+      }
+
+
+      const users = newArr[0];
+
+      Object.entries(users).forEach(([key, user]) => {
+        if (key !== 'id') {
+          tbody.innerHTML += `
+          <tr><td>${user.name}</td><td>${user.email}</td></tr>
+        `}
+      });
+
+    } catch (error) {
+      msg.textContent = "Error: " + error.message;
+    }
+  }
+
+  fetchUser();
+</script>
