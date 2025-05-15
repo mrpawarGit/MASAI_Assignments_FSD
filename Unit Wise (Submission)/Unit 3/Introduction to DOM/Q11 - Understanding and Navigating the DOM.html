@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding and Navigating the DOM</title>
+</head>
+<body>
+  <h1 id="heading1">Welcome to the HTML World!</h1>
+  <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis iure minima quo! Cum molestiae facere nostrum voluptatibus corporis rem suscipit eius? Fugiat optio, aliquid tempora illo blanditiis reprehenderit eveniet cumque!</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam dicta, aliquid consectetur eius laudantium consequuntur impedit consequatur repellat vero atque saepe veniam ut aperiam temporibus porro. Dolore quis omnis quidem!</p>
+
+  <div class="container">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil et assumenda explicabo. Error, itaque. Amet laudantium facilis error doloribus quas corporis libero dolores eum neque praesentium, vitae, hic, iure fugiat!</p>
+  </div>
+</body>
+</html>
+
+<script>
+  // 1
+  let h1 = document.getElementById("heading1")
+  h1.innerText = "Welcome to the DOM World!"
+
+  // 2
+  let para = document.getElementsByTagName("p")
+  for(let i=0;i<para.length;i++){
+    para[i].style.color = "blue";
+  }
+
+  // 3
+  let div = document.querySelector(".container")
+  div.style.backgroundColor = "yellow";
+
+</script>
