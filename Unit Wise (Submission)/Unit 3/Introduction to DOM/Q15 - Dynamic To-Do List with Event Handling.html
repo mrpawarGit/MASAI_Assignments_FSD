@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic To-Do List with Event Handling</title>
+</head>
+
+<body>
+  <h2>Dynamic To-Do List</h2>
+  <input type="text" id="task" placeholder="Enter Task">
+  <button id="add_task_btn">Add Task</button>
+  <ul id="ulist"></ul>
+</body>
+
+</html>
+
+<script>
+
+  let add_task_btn = document.getElementById("add_task_btn");
+
+  add_task_btn.addEventListener('click', () => {
+    let task = document.getElementById("task").value;
+    let ul = document.getElementById("ulist")
+    let li = document.createElement("li");
+    li.textContent = task
+
+    //new btns
+    let deleteBtn = document.createElement('button')
+    let completeBtn = document.createElement('button')
+
+    deleteBtn.textContent = "Delete";
+    completeBtn.textContent = "Complete";
+
+    if (task) {
+      ul.appendChild(li);
+      ul.appendChild(completeBtn)
+      ul.appendChild(deleteBtn)
+    }
+
+    // event for inner btns
+    //delete
+    deleteBtn.addEventListener('click', () => {
+      ul.removeChild(li)
+      ul.removeChild(completeBtn)
+      ul.removeChild(deleteBtn)
+    })
+
+    //complete
+    completeBtn.addEventListener('click', () => {
+      li.style.textDecoration = "line-through"
+    })
+
+    // clear text area
+    document.getElementById("task").value = ""
+  })
+
+</script>
