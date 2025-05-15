@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive DOM Manipulation</title>
 </head>
+
 <body>
-  
+  <h2>Interactive DOM Manipulation</h2>
+  <input type="text" id="color_name" placeholder="Enter Color">
+  <button id="color_btn">Change Background</button>
+  <br><br>
+  <textarea id="text_content" placeholder="Enter Text"></textarea>
+  <button id="update_btn">Update Text</button><br><br>
+
+  <div id="para">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dicta quaerat doloremque labore iste fugit.
+    Delectus et beatae dolorum, dicta quod officiis, odio vel, tenetur repellendus assumenda fuga minima corrupti!
+  </div>
 </body>
+
 </html>
+
+<script>
+  let update_btn = document.getElementById("update_btn")
+  let color_btn = document.getElementById("color_btn")
+  let para = document.getElementById("para")
+
+  // events
+
+  update_btn.addEventListener('click', () => {
+    let text_content = document.getElementById("text_content").value;
+
+    if (text_content !== "") {
+      para.textContent = text_content;
+    } else {
+      alert("Please enter some text!");
+    }
+  })
+
+  color_btn.addEventListener('click', () => {
+    let colorName = document.getElementById("color_name").value;
+
+    if (isValidColor(colorName)) {
+      para.style.backgroundColor = colorName
+    } else {
+      alert("Please enter Valid Color!");
+    }
+
+  })
+
+  // fn for color
+  function isValidColor(color) {
+    let temp = document.createElement("div");
+    temp.style.color = "";
+    temp.style.color = color;
+    return temp.style.color !== "";
+  }
+
+</script>
