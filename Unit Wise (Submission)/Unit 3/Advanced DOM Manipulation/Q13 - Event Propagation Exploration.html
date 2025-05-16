@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Propagation Exploration</title>
+  <style>
+    div {
+      padding: 20px;
+      margin: 10px;
+      border: 2px solid black;
+      color: white;
+    }
+
+    #div1 {
+      background-color: green;
+    }
+
+    #div2 {
+      background-color: red;
+    }
+
+    #div3 {
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="div1">
+    div1
+    <button id="button1">Button 1</button>
+    <div id="div2">
+      div2
+      <button id="button2">Button 2</button>
+      <div id="div3">
+        div3
+        <button id="button3">Button 3</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  function addListeners(element, name) {
+    // capturing
+    element.addEventListener('click', function (e) {
+      alert(`${name} (capturing)`);
+    }, true);
+
+    // bubbling
+    element.addEventListener('click', function (e) {
+      alert(`${name} (bubbling)`);
+    }, false);
+  }
+
+  // adding listeners to divs
+  addListeners(document.getElementById('div1'), 'Div 1');
+  addListeners(document.getElementById('div2'), 'Div 2');
+  addListeners(document.getElementById('div3'), 'Div 3');
+
+  // adding listners to buttons
+  addListeners(document.getElementById('btn1'), 'Button 1');
+  addListeners(document.getElementById('btn2'), 'Button 2');
+
+  let btn3 = document.getElementById('btn3');
+
+  btn3.addEventListener('click', function (e) {
+    alert('Button 3 (capturing)');
+  }, true);
+
+  btn3.addEventListener('click', function (e) {
+    alert('Button 3 (bubbling) - stopping propagation');
+    e.stopPropagation();
+  }, false);
+
+</script>
