@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>L1: Iterating Over Array of Objects and Creating a Grid View with Conditional Styling</title>
-</head>
-<body>
   
+</head>
+
+<body>
+  <h1>Product Grid</h1>
+  <div class="grid-container" id="productGrid"></div>
 </body>
+<div class="product_name"></div>
+
 </html>
+
+<script>
+  const products = [
+    { id: 1, name: "Product A", price: 50, inStock: true },
+    { id: 2, name: "Product B", price: 30, inStock: false },
+    { id: 3, name: "Product C", price: 70, inStock: true },
+    { id: 4, name: "Product D", price: 20, inStock: false }
+  ];
+
+  let productGrid = document.getElementById("productGrid");
+
+  products.forEach(product => {
+    let card = document.createElement('div');
+    card.className = 'product_card' + (product.inStock ? 'in_stock' : 'outof_stock');
+
+    card.innerHTML = `
+      <div class="product_name">${product.name}</div>
+      <div class="product_price">${product.price}</div>
+      <div class="stock_status">${product.inStock ? "In Stock" : "Out of Stock"}</div>
+    `
+    productGrid.appendChild(card)
+  })
+
+</script>
