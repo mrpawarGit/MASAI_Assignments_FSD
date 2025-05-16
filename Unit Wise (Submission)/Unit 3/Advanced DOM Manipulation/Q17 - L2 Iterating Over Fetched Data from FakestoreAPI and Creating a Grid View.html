@@ -1,11 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>L2: Iterating Over Fetched Data from FakestoreAPI and Creating a Grid View</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .productSet {
+      border: 3px solid;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      transition: transform 0.2s;
+    }
+
+    .productSet:hover {
+      transform: scale(1.02);
+    }
+
+    img {
+      max-width: 100px;
+      max-height: 120px;
+    }
+
+    .h2-main {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .border-green {
+      border-color: green;
+    }
+
+    .border-yellow {
+      border-color: yellow;
+    }
+  </style>
 </head>
+
 <body>
-  
+  <h2 class="h2-main">Product Grid from FakeStore-API</h2>
+  <div class="grid-container" id="productGrid"></div>
+
+  <script>
+    const div = document.getElementById('productGrid');
+
+    fetch('https://fakestoreapi.com/products')
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(product => {
+          const newDiv = document.createElement('div');
+          newDiv.className = 'productSet ' + (product.price > 50 ? 'border-yellow' : 'border-green');
+
+          newDiv.innerHTML = `
+            <img src="${product.image}" alt="${product.title}">
+            <h4>${product.title}</h4>
+            <p>Price: $${product.price}</p>
+          `;
+
+          div.appendChild(newDiv);
+        });
+      });
+  </script>
 </body>
+
 </html>
