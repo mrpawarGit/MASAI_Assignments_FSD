@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Theme Selector Using sessionStorage</title>
+  <style>
+    body {
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    #themecolor {
+      width: 150px;
+      height: 40px;
+      border: 2px solid;
+      font-weight: bold;
+      text-align: center;
+      font-size: larger;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body id="body">
+  <h2>Select Theme</h2>
+  <select name="" id="themecolor" onchange="themeChanger()">
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+    <option value="blue">Blue</option>
+  </select>
+</body>
+
+</html>
+
+<script>
+  function themeChanger() {
+    let theme = document.getElementById('themecolor').value
+    let body = document.getElementById('body')
+    
+    sessionStorage.setItem('themeChoice',theme)
+    let choiceTheme = sessionStorage.getItem('themeChoice')
+
+    if (choiceTheme == 'light') {
+      body.style.backgroundColor = 'white'
+      body.style.color = 'black'
+    }
+    else if (choiceTheme == 'dark') {
+      body.style.backgroundColor = 'black'
+      body.style.color = 'white'
+    }
+    else {
+      body.style.backgroundColor = 'blue'
+      body.style.color = 'white'
+    }
+  }  
+</script>
