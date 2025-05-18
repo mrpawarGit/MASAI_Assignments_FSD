@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save and Load User Notes</title>
+</head>
+
+<body>
+  <h2>Notes</h2>
+  <input type="text" placeholder="Enter Notes" id="notesInput">
+  <button onclick="loadNotes()">Load Notes</button>
+  <button onclick="clearNotes()">Clear Notes</button>
+
+  <ul id="container"></ul>
+
+  <script>
+    // onload
+    window.onload = function () {
+      dispData();
+    };
+
+    function loadNotes() {
+      let todoInput = document.getElementById("notesInput").value.trim();
+
+      if (todoInput === "") {
+        alert("Please enter a note.");
+        return;
+      }
+
+      let notes = JSON.parse(localStorage.getItem('notes')) || [];
+      notes.push(todoInput);
+      localStorage.setItem("notes", JSON.stringify(notes));
+      document.getElementById("notesInput").value = "";
+      dispData();
+    }
+
+    function dispData() {
+      let notes = JSON.parse(localStorage.getItem('notes')) || [];
+      let ul = document.getElementById("container");
+      ul.innerHTML = "";
+
+      notes.forEach(note => {
+        let li = document.createElement("li");
+        li.innerText = note;
+        ul.appendChild(li);
+      });
+    }
+
+    function clearNotes() {
+      localStorage.removeItem('notes'); 
+      document.getElementById('container').innerHTML = "";
+    }
+  </script>
+</body>
+
+</html>
