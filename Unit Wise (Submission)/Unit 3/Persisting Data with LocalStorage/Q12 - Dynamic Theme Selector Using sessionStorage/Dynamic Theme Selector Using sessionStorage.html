@@ -12,6 +12,7 @@
       text-align: center;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
+
     #themecolor {
       width: 150px;
       height: 40px;
@@ -39,8 +40,8 @@
   function themeChanger() {
     let theme = document.getElementById('themecolor').value
     let body = document.getElementById('body')
-    
-    sessionStorage.setItem('themeChoice',theme)
+
+    sessionStorage.setItem('themeChoice', theme)
     let choiceTheme = sessionStorage.getItem('themeChoice')
 
     if (choiceTheme == 'light') {
