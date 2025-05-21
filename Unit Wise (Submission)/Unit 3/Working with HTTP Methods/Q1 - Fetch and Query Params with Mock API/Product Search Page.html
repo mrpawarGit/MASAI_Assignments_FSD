@@ -43,6 +43,10 @@
       padding: 10px;
       margin: 5px;
     }
+
+    .no_result {
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -101,6 +105,13 @@
       `
       container.appendChild(div)
     })
+
+    if(products.length==0){
+      let h3 = document.createElement('h3')
+      h3.innerText = "No Result Found !!"
+      h3.className = 'no_result'
+      container.appendChild(h3)
+    }
   }
 
   async function fetchProducts() {
