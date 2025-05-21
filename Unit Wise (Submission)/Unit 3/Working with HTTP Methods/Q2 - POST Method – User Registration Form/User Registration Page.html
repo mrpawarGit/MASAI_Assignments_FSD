@@ -8,11 +8,53 @@
 </head>
 
 <body>
+  <h2>User Registration Form</h2>
+  <form onsubmit="registerUser(event)">
+    <input type="text" placeholder="Enter Name" id="name" required>
+    <input type="email" placeholder="Enter Email" id="email" required>
+    <input type="password" placeholder="Enter Password" id="password" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="msg"></div>
 
 </body>
 
 </html>
 
 <script>
-  
+  async function registerUser(event) {
+    event.preventDefault(); // Prevent reload
+
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let msg = document.getElementById('msg');
+
+    if (name && email && password) {
+      try {
+        let response = await fetch('https://682d8bbf4fae1889475675e0.mockapi.io/v1/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        if (response.ok) {
+          msg.innerText = "Registration successful!";
+          msg.style.color = "green";
+          document.querySelector("form").reset(); // Clear form
+        } else {
+          msg.innerText = "Registration failed. Please try again.";
+          msg.style.color = "red";
+        }
+      } catch (error) {
+        msg.innerText = "An error occurred. Please try again later.";
+        msg.style.color = "red";
+        console.error('Error:', error);
+      }
+    } else {
+      msg.innerText = "Invalid Input";
+      msg.style.color = "red";
+    }
+  }
 </script>
