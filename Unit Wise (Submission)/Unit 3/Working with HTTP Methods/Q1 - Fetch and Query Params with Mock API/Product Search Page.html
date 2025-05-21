@@ -1,11 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Search Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    .productPacket {
+      border: 1px solid;
+      text-align: center;
+      padding: 5px;
+      margin: 10px;
+      display: inline-block;
+      width: 23%;
+    }
+
+    .productPacket:hover {
+      border: 3px solid red;
+    }
+
+    #div1 {
+      text-align: center;
+      padding: 10px;
+      margin: 5px;
+    }
+
+    #div1>h2 {
+      margin-bottom: 15px;
+      font-size: 35px;
+    }
+
+    select, input, button {
+      padding: 10px;
+      margin: 5px;
+    }
+  </style>
 </head>
+
 <body>
-  
+  <div id="div1">
+    <h2>Search Products</h2>
+    <select id="category">
+      <option value="">Select Category</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Clothing">Clothing</option>
+      <option value="Books">Books</option>
+    </select>
+    <input type="number" placeholder="Minmum Price" id="minPrice">
+    <input type="number" placeholder="Maximum Price" id="maxPrice">
+    <button onclick="searchProduct()">Search</button>
+  </div>
+  <div id="container"></div>
 </body>
+
 </html>
+
+<script>
+
+  async function searchProduct() {
+    let API_KEY = 'https://682d8bbf4fae1889475675e0.mockapi.io/v1/products?';
+
+    let category = document.getElementById('category').value;
+    let minPrice = document.getElementById('minPrice').value;
+    let maxPrice = document.getElementById('maxPrice').value;
+    let container = document.getElementById('container');
+    container.innerHTML = ""
+
+    //category
+    if (category) {
+      API_KEY += `category=${category}&`
+    }
+
+    let res = await fetch(API_KEY);
+    let products = await res.json()
+
+    if (minPrice || maxPrice) {
+      let min = minPrice || 0;
+      let max = maxPrice || Infinity;
+      products = products.filter(product => {
+        return product.price >= min && product.price <= max
+      })
+    }
+
+    products.forEach(product => {
+      let div = document.createElement('div');
+      div.className = 'productPacket'
+      div.innerHTML = `
+      <h4>${product.name}</h4>
+        <img src="https://m.media-amazon.com/images/I/31qJ7qfj-9L._SX300_SY300_QL70_FMwebp_.jpg" alt="">
+        <p>Price: ${product.price} rs</p>
+      `
+      container.appendChild(div)
+    })
+  }
+
+  async function fetchProducts() {
+    await searchProduct()
+  }
+
+  fetchProducts()
+</script>
