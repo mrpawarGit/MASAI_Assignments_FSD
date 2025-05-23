@@ -103,6 +103,9 @@
 
   const API_KEY = 'https://feedback-form-ad966-default-rtdb.asia-southeast1.firebasedatabase.app/feedback.json'
 
+  let isEdit = null;
+  let method = isEdit ?  'PATCH' : 'POST';
+
   async function submitForm() {
     let username = document.getElementById('username').value;
     let message = document.getElementById('feedback').value;
@@ -110,7 +113,7 @@
     try {
       if (username && message) {
         let res = await fetch(API_KEY, {
-          method: 'POST',
+          method,
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, message })
         })
@@ -149,11 +152,17 @@
       packet.innerHTML = `
         <p><b>Username:</b> ${feedback.username}</p>
         <p><b>Message:</b> ${feedback.message}</p>
-        <button>Edit</button>
+        <button onclick="editForm('${feedback.username}', '${feedback.message}')">Edit</button>
       `
-
       container.appendChild(packet)
     })
+  }
+
+  function editForm(user, msg) {
+
+    document.getElementById('username').value = user;
+    document.getElementById('feedback').value = msg;
+    isEdit = true;
   }
 
   fetchData()
