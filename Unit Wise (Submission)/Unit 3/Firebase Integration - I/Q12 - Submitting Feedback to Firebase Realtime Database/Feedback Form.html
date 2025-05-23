@@ -1,11 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feedback Form</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: grey;
+      color: black;
+    }
+
+    #form_box {
+      padding: 20px;
+      margin-top: 80px;
+      padding-bottom: 30px;
+      text-align: center;
+      border: 2px solid black;
+      display: inline-block;
+      width: 30%;
+      background-color: rgb(203, 199, 199);
+      color: black;
+    }
+
+    #username {
+      margin-bottom: 10px;
+      width: 80%;
+      height: 30px;
+      border: 2px solid black;
+    }
+
+    #feedback {
+      min-width: 80%;
+      max-width: 80%;
+      height: 150px;
+      border: 2px solid black;
+    }
+
+    #subBtn {
+      min-width: 80%;
+      height: 40px;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 17px;
+      cursor: pointer;
+      border: 2px solid black;
+
+    }
+
+    #title_h2 {
+      /* position: relative; */
+      margin-top: 2px;
+      padding-top: 1px;
+    }
+  </style>
 </head>
+
 <body>
-  
+  <div id="form_box">
+    <h2 id="title_h2">Enter Feedback</h2>
+    <input type="text" placeholder="Enter Username" id="username"><br>
+    <textarea id="feedback" placeholder="Enter Feedback"></textarea><br>
+    <button id="subBtn">Submit</button>
+  </div>
+  <div id="ackMsg"></div>
 </body>
+
 </html>
