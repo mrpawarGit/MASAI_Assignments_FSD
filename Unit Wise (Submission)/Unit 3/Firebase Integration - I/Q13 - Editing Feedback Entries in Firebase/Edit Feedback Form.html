@@ -1,11 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Feedback Form</title>
+  <style>
+    body {
+      /* text-align: center; */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #form_box {
+      padding: 10px;
+      /* margin-top: 80px; */
+      margin-left: 35%;
+      padding-bottom: 30px;
+      text-align: center;
+      border: 2px solid black;
+      display: inline-block;
+      min-width: 30%;
+      background-color: rgb(197, 200, 201);
+    }
+
+    #username {
+      margin-bottom: 10px;
+      width: 80%;
+      height: 30px;
+      border: 2px solid black;
+    }
+
+    #feedback {
+      min-width: 80%;
+      max-width: 80%;
+      height: 120px;
+      border: 2px solid black;
+    }
+
+    #subBtn {
+      min-width: 80%;
+      height: 40px;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 17px;
+      cursor: pointer;
+      border: 2px solid black;
+    }
+
+    #subBtn:hover {
+      color: white;
+      background-color: rgb(106, 105, 105);
+    }
+
+    #title_h2 {
+      margin-top: 2px;
+      padding-top: 1px;
+    }
+
+    #container {
+      border: 1px solid;
+      margin-top: 10px;
+    }
+
+    .packet {
+      border: 1px solid;
+      display: inline-block;
+      width: 320px;
+      height: auto;
+      padding: 10px;
+      margin-left: 25px;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .packet>button {
+      margin-top: 10px;
+      width: 99%;
+      height: 28px;
+      cursor: pointer;
+    }
+
+    .packet>button:hover {
+      color: white;
+      background-color: rgb(106, 105, 105);
+    }
+  </style>
 </head>
+
 <body>
-  
+  <div id="form_box">
+    <h2 id="title_h2">Feedback</h2>
+    <input type="text" placeholder="Enter Username" id="username"><br>
+    <textarea id="feedback" placeholder="Enter Feedback"></textarea><br>
+    <button id="subBtn" onclick="submitForm()">Submit</button>
+  </div>
+  <div id="container"></div>
 </body>
+
 </html>
+
+<script>
+
+  const API_KEY = 'https://feedback-form-ad966-default-rtdb.asia-southeast1.firebasedatabase.app/feedback.json'
+
+  async function submitForm() {
+    let username = document.getElementById('username').value;
+    let message = document.getElementById('feedback').value;
+
+    try {
+      if (username && message) {
+        let res = await fetch(API_KEY, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, message })
+        })
+
+        if (res.ok) {
+          alert("Submitted Successfully")
+        }
+        else {
+          alert("Not Submitted, try Again!")
+        }
+
+        document.getElementById('username').value = ""
+        document.getElementById('feedback').value = ""
+      }
+      else {
+        alert("enter data");
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  async function fetchData() {
+    let container = document.getElementById('container');
+
+    let res = await fetch(API_KEY)
+    let data = await res.json()
+
+    console.log(data)
+
+    //Object.values(data).forEach
+    Object.values(data).forEach(feedback => {
+      let packet = document.createElement('div')
+      packet.className = 'packet';
+
+      packet.innerHTML = `
+        <p><b>Username:</b> ${feedback.username}</p>
+        <p><b>Message:</b> ${feedback.message}</p>
+        <button>Edit</button>
+      `
+
+      container.appendChild(packet)
+    })
+  }
+
+  fetchData()
+</script>
