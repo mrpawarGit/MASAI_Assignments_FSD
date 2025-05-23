@@ -66,7 +66,7 @@
     <h2 id="title_h2">Enter Feedback</h2>
     <input type="text" placeholder="Enter Username" id="username"><br>
     <textarea id="feedback" placeholder="Enter Feedback"></textarea><br>
-    <button id="subBtn">Submit</button>
+    <button id="subBtn" onclick="submitForm()">Submit</button>
   </div>
   <div id="ackMsg"></div>
 </body>
@@ -74,6 +74,34 @@
 </html>
 
 <script>
+  async function submitForm() {
+    let username = document.getElementById('username').value;
+    let message = document.getElementById('feedback').value;
 
+    try {
+      if (username && message) {
+        let res = await fetch('https://feedback-form-ad966-default-rtdb.asia-southeast1.firebasedatabase.app/feedback.json', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, message })
+        })
+  
+        if (res.ok) {
+          alert("Submitted Successfully")
+        }
+        else {
+          alert("Not Submitted, try Again!")
+        }
+
+        document.getElementById('username').value = ""
+        document.getElementById('feedback').value = ""
+      }
+      else {
+        alert("enter data");
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
 
 </script>
