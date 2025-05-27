@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+</head>
+
+<body>
+
+  <h2>Books</h2>
+  <div id="bookConatiner"></div>
+
+  <h2>Members</h2>
+
+  <table border="1">
+    <thead>
+      <th>Name</th>
+      <th>Membership Date</th>
+    </thead>
+    <tbody id="memberConatiner">
+      
+    </tbody>
+  </table>
+
+</body>
+
+</html>
+
+<script>
+  const API_KEY = 'https://library-aa692-default-rtdb.asia-southeast1.firebasedatabase.app/library.json'
+
+  let books;
+  let members;
+
+  async function fetchData() {
+    let res = await fetch(API_KEY)
+    let data = await res.json()
+
+    books = data.books
+    members = data.members
+
+    dispData()
+  }
+
+  function dispData() {
+    let bookConatiner = document.getElementById('bookConatiner')
+    bookConatiner.innerHTML = ""
+
+    books.forEach(book => {
+      let bookBox = document.createElement('div')
+
+      bookBox.innerHTML = `
+        <h4>Title: ${book.title}</h4>
+        <p>Author: ${book.author}</p>
+        <p>Published Year: ${book.publishedYear}</p>
+        <p>Genre: ${book.genre}</p>
+      `
+      bookConatiner.appendChild(bookBox)
+    })
+
+    let memberConatiner = document.getElementById('memberConatiner')
+    memberConatiner.innerHTML = ""
+
+    members.forEach(member => {
+      let tr = document.createElement('tr')
+
+      tr.innerHTML = `
+        <td>${member.name}</td>
+        <td>${member.membershipDate}</td>
+      `
+      memberConatiner.appendChild(tr)
+    })
+
+
+
+  }
+
+  fetchData()
+</script>
