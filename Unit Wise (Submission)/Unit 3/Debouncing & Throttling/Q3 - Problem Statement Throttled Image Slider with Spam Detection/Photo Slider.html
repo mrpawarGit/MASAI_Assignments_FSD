@@ -1,21 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PHOTO GALLARY</title>
-</head>
-<body>
-  <h2>Throttled Image Slider</h2>
-  <img id="slider" src="https://picsum.photos/600/400?random=1" alt="random-img">
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    div>button {
+      border: 1px solid black;
+      border-radius: 5px;
+      margin: 5px;
+      width: 15%;
+      height: 40px;
+      background-color: rgb(227, 83, 107);
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    div>button:hover {
+      background-color: rgb(237, 116, 136);
+    }
+
+    img {
+      margin: 10px;
+      border: 2px solid;
+      border-radius: 8px;
+    }
+
+    #box {
+      border: 2px solid red;
+      margin: 15px;
+      padding: 15px;
+    }
+
+    h2 {
+      font-size: 30px;
+      color: rgba(227, 24, 24, 0.889);
+      border: 2px solid;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Image Slider (Throttled)</h2>
+  <div id="box">
+    <img id="slider" src="https://picsum.photos/600/400?random=1" alt="random-img">
+  </div>
   <div>
     <button id="prevBtn">Previous</button>
     <button id="nextBtn">Next</button>
   </div>
 </body>
+
 </html>
 
 <script>
-  
+  let silderNumber = 1;
+  let silder = document.getElementById('slider')
+  let lastClick = 0;
+  let clickCnt = 0;
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    throttledImg('prev')
+  })
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    throttledImg('next')
+  })
+
+  function throttledImg(dir) {
+    let now = Date.now()
+
+    if (now - lastClick < 1000) {
+      clickCnt++;
+      if (clickCnt > 3) {
+        alert("Chill chill, loading it!!")
+      }
+      return;
+    }
+
+    clickCnt = 1;
+    lastClick = now;
+
+    if (dir == 'next') {
+      silderNumber++
+    }
+    else if (dir === 'prev' && silderNumber > 1) {
+      silderNumber--;
+    }
+
+    silder.src = `https://picsum.photos/600/400?random=${Date.now()}`
+
+  }
 </script>
