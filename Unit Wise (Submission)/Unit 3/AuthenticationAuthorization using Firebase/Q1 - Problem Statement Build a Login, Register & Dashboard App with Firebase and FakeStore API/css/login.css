@@ -60,6 +60,10 @@ body {
   text-decoration: none;
 }
 
+#login-msg{
+  color: red;
+}
+
 /* Mobile Responive */
 @media(max-width: 480px) {
   .container {
