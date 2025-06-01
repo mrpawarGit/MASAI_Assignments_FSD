@@ -1,4 +1,3 @@
-/* General Reset */
 * {
   margin: 0;
   padding: 0;
@@ -59,7 +58,7 @@ nav p {
   padding: 20px;
 }
 
-/* Product Card */
+/* Product Card/Box */
 .product-box {
   background-color: white;
   padding: 15px;
