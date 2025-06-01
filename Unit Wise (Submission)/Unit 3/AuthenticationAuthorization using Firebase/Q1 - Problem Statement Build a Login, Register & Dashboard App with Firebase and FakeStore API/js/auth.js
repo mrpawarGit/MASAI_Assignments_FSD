@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
           password
         );
         // redirect users to login page
+        alert("Registration Sucessfull!");
         window.location.href = "index.html";
       } catch (error) {
         document.getElementById("signup-msg").innerText = error.message;
@@ -45,7 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-      await signOut(auth)
+      await signOut(auth);
+      alert("Logout Sucessfull!");
       window.location.href = "index.html";
     });
   }
