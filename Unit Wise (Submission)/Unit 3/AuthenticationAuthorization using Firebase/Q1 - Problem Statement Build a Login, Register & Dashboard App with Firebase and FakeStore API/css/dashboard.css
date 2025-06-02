@@ -31,7 +31,7 @@ nav h2 {
   font-size: 30px;
   font-weight: 600;
   font-weight: bold;
-  left: 47%;
+  left: 0;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -70,6 +70,7 @@ nav p {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   text-align: center;
   transition: transform 0.2s ease-in-out;
+  align-content: center;
 }
 
 .product-box:hover {
