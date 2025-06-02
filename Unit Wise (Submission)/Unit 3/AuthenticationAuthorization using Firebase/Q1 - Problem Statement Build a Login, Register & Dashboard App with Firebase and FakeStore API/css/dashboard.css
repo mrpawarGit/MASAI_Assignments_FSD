@@ -7,10 +7,9 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f4f4;
-  padding-top: 80px; /* space for fixed navbar */
+  padding-top: 80px; 
 }
 
-/* Fixed Navbar */
 nav {
   position: fixed;
   top: 0;
@@ -54,7 +53,6 @@ nav p {
   background-color: #c62828;
 }
 
-/* Container Grid */
 #conatiner {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -62,7 +60,6 @@ nav p {
   padding: 20px;
 }
 
-/* Product Card/Box */
 .product-box {
   background-color: white;
   padding: 15px;
