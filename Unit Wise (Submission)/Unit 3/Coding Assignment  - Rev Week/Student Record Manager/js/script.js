@@ -1,5 +1,8 @@
 let api = `https://studentdb-701b6-default-rtdb.asia-southeast1.firebasedatabase.app/students.json`;
 
+
+
+// Fetch Students
 async function fetchData() {
   let res = await fetch(api);
   let students = await res.json();
@@ -15,7 +18,10 @@ async function fetchData() {
         <td>${student.Batch}</td>
         <td>${student.Age}</td>
         <td>${student.Score}</td>
-        <td>Edit/Delete</td>
+        <td>
+          <button>Edit</button>
+          <button>Delete</button>
+      </td>
     `;
 
     tbody.appendChild(tr)
