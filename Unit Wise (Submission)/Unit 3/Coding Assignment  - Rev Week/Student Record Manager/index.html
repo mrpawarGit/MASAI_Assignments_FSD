@@ -8,11 +8,21 @@
 <body>
   <h2>Student Record Manager</h2>
 
+  
+  <input type="text" id="Name" placeholder="Enter Name">
+  <input type="text" id="Batch" placeholder="Enter Batch">
+  <input type="number" id="Age" placeholder="Enter Age">
+  <input type="number" id="Score" placeholder="Enter Score">
+  <button>Add</button>
+
+  <div>
   <input type="text" id="student-name" placeholder="Enter Student Name">
   <select id="sort-by-marks">
-    <option value=""></option>
+    <option value="">Sort By Score</option>
+    <option value="high">High</option>
+    <option value="low">Low</option>
   </select>
-
+  </div>
   <div id="container">
     <table border="1">
       <thead>
@@ -23,9 +33,6 @@
         <th>Action</th>
       </thead>
       <tbody id="tbody">
-        <tr>
-          
-        </tr>
       </tbody>
     </table>
   </div>
