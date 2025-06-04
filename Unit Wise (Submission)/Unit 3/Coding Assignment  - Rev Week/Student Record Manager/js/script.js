@@ -2,9 +2,16 @@ let api = `https://studentdb-701b6-default-rtdb.asia-southeast1.firebasedatabase
 
 async function fetchData() {
   let res = await fetch(api);
-  let data = await res.json()
+  let students = await res.json()
+  let tbody = document.getElementById('tbody')
+  tbody.innerHTML = ""
 
-  console.log(data)
+  students.forEach(student=>{
+    let div = document.createElement('tbody')
+    div.className = 'student-row';
+    
+
+  })
 }
 
 addEventListener("DOMContentLoaded", () => fetchData());
