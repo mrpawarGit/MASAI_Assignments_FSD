@@ -1,10 +1,12 @@
-const grid = document.getElementById('character-grid');
-const nextBtn = document.getElementById('next-btn');
-const prevBtn = document.getElementById('prev-btn');
+const grid = document.getElementById("character-grid");
+const nextBtn = document.getElementById("next-btn");
+const prevBtn = document.getElementById("prev-btn");
 let currentPage = 1;
 
 async function fetchCharacters(page = 1) {
-  const res = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
+  const res = await fetch(
+    `https://rickandmortyapi.com/api/character?page=${page}`
+  );
   const data = await res.json();
   renderCharacters(data.results);
   nextBtn.disabled = !data.info.next;
@@ -12,10 +14,10 @@ async function fetchCharacters(page = 1) {
 }
 
 function renderCharacters(characters) {
-  grid.innerHTML = '';
-  characters.forEach(char => {
-    const card = document.createElement('div');
-    card.className = 'card';
+  grid.innerHTML = "";
+  characters.forEach((char) => {
+    const card = document.createElement("div");
+    card.className = "card";
     card.innerHTML = `
       <img src="${char.image}" alt="${char.name}" />
       <h3>${char.name}</h3>
@@ -26,11 +28,11 @@ function renderCharacters(characters) {
   });
 }
 
-nextBtn.addEventListener('click', () => {
+nextBtn.addEventListener("click", () => {
   currentPage++;
   fetchCharacters(currentPage);
 });
-prevBtn.addEventListener('click', () => {
+prevBtn.addEventListener("click", () => {
   currentPage--;
   fetchCharacters(currentPage);
 });
@@ -41,7 +43,12 @@ setInterval(updateClock, 1000);
 
 function updateClock() {
   const now = new Date();
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('clock').textContent =
-    now.toLocaleTimeString() + ' ' + now.toLocaleDateString(undefined, options);
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString() + " " + now.toLocaleDateString(undefined, options);
 }

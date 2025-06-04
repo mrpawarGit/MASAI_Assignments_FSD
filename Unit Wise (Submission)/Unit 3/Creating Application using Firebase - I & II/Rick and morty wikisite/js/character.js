@@ -1,6 +1,6 @@
-const detailContainer = document.getElementById('character-detail');
+const detailContainer = document.getElementById("character-detail");
 const urlParams = new URLSearchParams(window.location.search);
-const charId = urlParams.get('id');
+const charId = urlParams.get("id");
 
 async function fetchCharacter(id) {
   const res = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
@@ -11,7 +11,7 @@ async function fetchCharacter(id) {
     <h2>${char.name}</h2>
     <p><strong>Status:</strong> ${char.status}</p>
     <p><strong>Species:</strong> ${char.species}</p>
-    <p><strong>Type:</strong> ${char.type || 'N/A'}</p>
+    <p><strong>Type:</strong> ${char.type || "N/A"}</p>
     <p><strong>Gender:</strong> ${char.gender}</p>
     <p><strong>Origin:</strong> ${char.origin.name}</p>
     <p><strong>Location:</strong> ${char.location.name}</p>
@@ -25,7 +25,12 @@ setInterval(updateClock, 1000);
 
 function updateClock() {
   const now = new Date();
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('clock').textContent =
-    now.toLocaleTimeString() + ' ' + now.toLocaleDateString(undefined, options);
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString() + " " + now.toLocaleDateString(undefined, options);
 }
