@@ -1,61 +1,61 @@
 [
   {
     "Name": "Aarav Mehta",
-    "Batch": "FSDU03",
+    "Batch": "A",
     "Age": 22,
     "Score": 88
   },
   {
     "Name": "Diya Sharma",
-    "Batch": "FSDU02",
+    "Batch": "B",
     "Age": 24,
     "Score": 75
   },
   {
     "Name": "Kabir Singh",
-    "Batch": "FSDU01",
+    "Batch": "C",
     "Age": 23,
     "Score": 92
   },
   {
     "Name": "Meera Nair",
-    "Batch": "FSDU04",
+    "Batch": "A",
     "Age": 21,
     "Score": 68
   },
   {
     "Name": "Yash Patil",
-    "Batch": "FSDU03",
+    "Batch": "B",
     "Age": 25,
     "Score": 80
   },
   {
     "Name": "Ishaan Verma",
-    "Batch": "FSDU01",
+    "Batch": "C",
     "Age": 22,
     "Score": 59
   },
   {
     "Name": "Sara Khan",
-    "Batch": "FSDU04",
+    "Batch": "A",
     "Age": 23,
     "Score": 91
   },
   {
     "Name": "Riya Deshmukh",
-    "Batch": "FSDU02",
+    "Batch": "B",
     "Age": 21,
     "Score": 77
   },
   {
     "Name": "Kunal Joshi",
-    "Batch": "FSDU03",
+    "Batch": "C",
     "Age": 24,
     "Score": 85
   },
   {
     "Name": "Sneha Kulkarni",
-    "Batch": "FSDU01",
+    "Batch": "A",
     "Age": 22,
     "Score": 69
   }
