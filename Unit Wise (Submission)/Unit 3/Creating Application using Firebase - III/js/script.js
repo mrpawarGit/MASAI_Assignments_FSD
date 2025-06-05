@@ -5,7 +5,21 @@ async function fetchData(){
   let res = await fetch(api)
   let data = await res.json()
   
-  console.log(data)
+  dispData(data)
+}
+
+function dispData(data){
+  let container = document.getElementById("container")
+  container.innerHTML = ""
+
+  data.forEach(ele=>{
+    let charBox = document.createElement('div');
+    charBox.className = 'charBox'
+    
+    
+
+  })
+
 }
 
 window.addEventListener("DOMContentLoaded",fetchData())
