@@ -1,0 +1,24 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  margin: 5px;
+}
+
+h2 {
+  padding: 10px;
+}
+
+.filter-div{
+  padding: 10px;
+}
+
+.filter-div>input,select{
+  height: 30px;
+}
+
