@@ -16,8 +16,12 @@ function dispData(data){
     let charBox = document.createElement('div');
     charBox.className = 'charBox'
     
-    
-
+    charBox.innerHTML = `
+      <img src="${ele.image}" alt="${ele.image}">
+      <h4>${ele.name}</h4>
+      <p>${ele.species} - ${ele.gender}</p>
+    `
+    container.appendChild(charBox)
   })
 
 }
