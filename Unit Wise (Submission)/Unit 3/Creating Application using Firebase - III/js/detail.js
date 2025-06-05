@@ -10,10 +10,12 @@ async function fetchCharacter() {
     div.innerHTML = `
       <img src="${char.image}" />
       <h3>${char.name}</h3>
-      <p><strong>Species:</strong> ${char.species}</p>
+      <p><strong>Species:</strong> ${char.species.toUpperCase()}</p>
       <p><strong>Gender:</strong> ${char.gender}</p>
       <p><strong>Height:</strong> ${char.height} cm</p>
       <p><strong>Homeworld:</strong> ${char.homeworld}</p>
+      <p><strong>Eye Color:</strong> ${char.eyeColor}</p>
+      <p><strong>Skin Color:</strong> ${char.skinColor}</p>
     `;
   }
 }
