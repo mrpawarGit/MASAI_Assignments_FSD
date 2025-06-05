@@ -45,7 +45,6 @@
 let newId = null;
 let students = [];
 
-// Fetch data and render
 async function fetchData() {
   let res = await fetch(api + ".json");
   students = await res.json();
@@ -62,6 +61,7 @@ async function fetchData() {
   dispData(students);
 }
 
+// disp
 function dispData(data) {
   let tbody = document.getElementById("tbody");
   tbody.innerHTML = "";
@@ -82,7 +82,7 @@ function dispData(data) {
   });
 }
 
-// Add or Update
+// add
 async function addData() {
   let student = {
     Name: document.getElementById("Name").value.trim(),
@@ -112,7 +112,6 @@ async function addData() {
     });
   }
 
-  // Reset form
   document.getElementById("Name").value = "";
   document.getElementById("Batch").value = "";
   document.getElementById("Age").value = "";
@@ -121,7 +120,7 @@ async function addData() {
   fetchData();
 }
 
-// Edit
+// edit
 async function editData(id) {
   let res = await fetch(`${api}/${id}.json`);
   let data = await res.json();
@@ -135,22 +134,22 @@ async function editData(id) {
   document.getElementById("submit-btn").innerText = "Update";
 }
 
-// Delete
+// delete
 async function deleteData(id) {
   await fetch(`${api}/${id}.json`, { method: "DELETE" });
   fetchData();
 }
 
-// Search by Name
+// search
 document.getElementById("student-name").addEventListener("input", (e) => {
   let keyword = e.target.value.trim().toLowerCase();
-  let filtered = students.filter((student) =>
+  let filterStu = students.filter((student) =>
     student.Name.toLowerCase().includes(keyword)
   );
-  dispData(filtered);
+  dispData(filterStu);
 });
 
-// Sort by Score
+// sort
 document.getElementById("sort-by-marks").addEventListener("change", (e) => {
   let value = e.target.value;
   let sorted = [...students];
