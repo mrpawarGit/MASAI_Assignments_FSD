@@ -1,3 +1,4 @@
+// url
 let url = localStorage.getItem("charUrl");
 
 async function fetchCharacter() {
