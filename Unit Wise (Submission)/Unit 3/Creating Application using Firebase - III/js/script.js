@@ -51,4 +51,16 @@ document.getElementById("nextBtn").addEventListener("click", () => {
   }
 });
 
-window.addEventListener("DOMContentLoaded", fetchData);
+document.getElementById("theme").addEventListener("change", (e) => {
+  document.body.className = e.target.value;
+  localStorage.setItem("theme", e.target.value);
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    document.body.className = savedTheme;
+    document.getElementById("theme").value = savedTheme;
+  }
+  fetchData();
+});
