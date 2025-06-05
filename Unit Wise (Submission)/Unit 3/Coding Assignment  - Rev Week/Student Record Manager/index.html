@@ -8,21 +8,21 @@
 <body>
   <h2>Student Record Manager</h2>
 
-  
   <input type="text" id="Name" placeholder="Enter Name">
   <input type="text" id="Batch" placeholder="Enter Batch">
   <input type="number" id="Age" placeholder="Enter Age">
   <input type="number" id="Score" placeholder="Enter Score">
-  <button>Add</button>
+  <button id="submit-btn" onclick="addData()">Submit</button>
 
   <div>
-  <input type="text" id="student-name" placeholder="Enter Student Name">
-  <select id="sort-by-marks">
-    <option value="">Sort By Score</option>
-    <option value="high">High</option>
-    <option value="low">Low</option>
-  </select>
+    <input type="text" id="student-name" placeholder="Search by Student Name">
+    <select id="sort-by-marks">
+      <option value="">Sort By Score</option>
+      <option value="high">High to Low</option>
+      <option value="low">Low to High</option>
+    </select>
   </div>
+
   <div id="container">
     <table border="1">
       <thead>
@@ -36,9 +36,133 @@
       </tbody>
     </table>
   </div>
-
-  
-
-<script type="module" src="js/script.js"></script>
 </body>
 </html>
+
+<script>
+  let api =
+  "https://studentdb-701b6-default-rtdb.asia-southeast1.firebasedatabase.app/students";
+let newId = null;
+let students = [];
+
+// Fetch data and render
+async function fetchData() {
+  let res = await fetch(api + ".json");
+  students = await res.json();
+
+  if (!students) {
+    document.getElementById("tbody").innerHTML = "";
+    return;
+  }
+
+  students = Object.entries(students).map(([id, student]) => {
+    return { ...student, id };
+  });
+
+  dispData(students);
+}
+
+function dispData(data) {
+  let tbody = document.getElementById("tbody");
+  tbody.innerHTML = "";
+
+  data.forEach((student) => {
+    let tr = document.createElement("tr");
+    tr.innerHTML = `
+        <td>${student.Name}</td>
+        <td>${student.Batch}</td>
+        <td>${student.Age}</td>
+        <td>${student.Score}</td>
+        <td>
+          <button onclick="editData('${student.id}')">Edit</button>
+          <button onclick="deleteData('${student.id}')">Delete</button>
+        </td>
+      `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Add or Update
+async function addData() {
+  let student = {
+    Name: document.getElementById("Name").value.trim(),
+    Batch: document.getElementById("Batch").value.trim(),
+    Age: +document.getElementById("Age").value,
+    Score: +document.getElementById("Score").value,
+  };
+
+  if (!student.Name || !student.Batch) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  if (newId) {
+    await fetch(`${api}/${newId}.json`, {
+      method: "PATCH",
+      body: JSON.stringify(student),
+      headers: { "Content-Type": "application/json" },
+    });
+    newId = null;
+    document.getElementById("submit-btn").innerText = "Submit";
+  } else {
+    await fetch(api + ".json", {
+      method: "POST",
+      body: JSON.stringify(student),
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  // Reset form
+  document.getElementById("Name").value = "";
+  document.getElementById("Batch").value = "";
+  document.getElementById("Age").value = "";
+  document.getElementById("Score").value = "";
+
+  fetchData();
+}
+
+// Edit
+async function editData(id) {
+  let res = await fetch(`${api}/${id}.json`);
+  let data = await res.json();
+
+  document.getElementById("Name").value = data.Name;
+  document.getElementById("Batch").value = data.Batch;
+  document.getElementById("Age").value = data.Age;
+  document.getElementById("Score").value = data.Score;
+
+  newId = id;
+  document.getElementById("submit-btn").innerText = "Update";
+}
+
+// Delete
+async function deleteData(id) {
+  await fetch(`${api}/${id}.json`, { method: "DELETE" });
+  fetchData();
+}
+
+// Search by Name
+document.getElementById("student-name").addEventListener("input", (e) => {
+  let keyword = e.target.value.trim().toLowerCase();
+  let filtered = students.filter((student) =>
+    student.Name.toLowerCase().includes(keyword)
+  );
+  dispData(filtered);
+});
+
+// Sort by Score
+document.getElementById("sort-by-marks").addEventListener("change", (e) => {
+  let value = e.target.value;
+  let sorted = [...students];
+
+  if (value === "high") {
+    sorted.sort((a, b) => b.Score - a.Score);
+  } else if (value === "low") {
+    sorted.sort((a, b) => a.Score - b.Score);
+  }
+
+  dispData(sorted);
+});
+
+fetchData();
+</script>
