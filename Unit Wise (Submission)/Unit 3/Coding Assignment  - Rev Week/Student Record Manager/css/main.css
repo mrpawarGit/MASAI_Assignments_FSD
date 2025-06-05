@@ -7,7 +7,7 @@
 body {
   font-family: sans-serif;
   text-align: center;
-  margin: 5px;
+  margin: 10px;
 }
 
 h2 {
@@ -20,5 +20,45 @@ h2 {
 
 .filter-div>input,select{
   height: 30px;
+  text-align: center;
 }
+
+.input-div>input {
+  height: 30px;
+  width: 200px;
+  padding: 2px;
+}
+
+.input-div>button {
+  height: 29px;
+  width: 80px;
+}
+
+#container{
+  position: relative;
+  left: 15%;
+  padding: 20px;
+}
+
+#container>table{
+  border: 1px solid;
+}
+
+#container>table td{
+  padding: 18px;
+  width: 200px;
+}
+
+#container>table td>button{
+  width: 70px;
+  height: 30px;
+}
+
+#container>table thead {
+  height: 35px; 
+  border: 1px solid;
+}
+
+
+
 
