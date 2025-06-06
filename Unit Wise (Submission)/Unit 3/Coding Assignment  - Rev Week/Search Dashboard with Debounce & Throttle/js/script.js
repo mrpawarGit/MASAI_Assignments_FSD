@@ -2,6 +2,7 @@ let api =
   "https://userdb-1a783-default-rtdb.asia-southeast1.firebasedatabase.app/names.json";
 let students = [];
 
+// fetch
 async function fetchData() {
   let res = await fetch(api);
   students = await res.json();
@@ -9,13 +10,14 @@ async function fetchData() {
   dispData(students);
 }
 
+// disp
 function dispData(data) {
   let contaier = document.getElementById("contaier");
   contaier.innerHTML = "";
 
   // if no match
   if (data.length === 0) {
-    contaier.innerHTML = "<h4>No matches found.</h4>";
+    contaier.innerHTML = "<h4>No result.</h4>";
     return;
   }
 
@@ -30,22 +32,21 @@ function dispData(data) {
 }
 
 // debounce
-
 let debounceTime;
 let keystrokeDisp = document.getElementById("keystrokesCnt");
-let keystrokeCnt = 0
+let keystrokeCnt = 0;
 let debounceDisp = document.getElementById("debounceCnt");
-let debounceCnt = 0
+let debounceCnt = 0;
 
 let searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input", () => {
-  keystrokeCnt++
-  keystrokeDisp.innerText = keystrokeCnt
+  keystrokeCnt++;
+  keystrokeDisp.innerText = keystrokeCnt;
   clearTimeout(debounceTime);
 
   debounceTime = setTimeout(() => {
-    debounceCnt++
-    debounceDisp.innerText = debounceCnt
+    debounceCnt++;
+    debounceDisp.innerText = debounceCnt;
     let name = searchInput.value.toLowerCase();
     let filtered = students.filter((student) =>
       student.name.toLowerCase().includes(name)
@@ -56,4 +57,3 @@ searchInput.addEventListener("input", () => {
 });
 
 fetchData();
-
