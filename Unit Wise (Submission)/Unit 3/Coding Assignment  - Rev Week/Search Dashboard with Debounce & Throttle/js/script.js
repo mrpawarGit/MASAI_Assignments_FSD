@@ -32,12 +32,20 @@ function dispData(data) {
 // debounce
 
 let debounceTime;
+let keystrokeDisp = document.getElementById("keystrokesCnt");
+let keystrokeCnt = 0
+let debounceDisp = document.getElementById("debounceCnt");
+let debounceCnt = 0
 
 let searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input", () => {
+  keystrokeCnt++
+  keystrokeDisp.innerText = keystrokeCnt
   clearTimeout(debounceTime);
 
   debounceTime = setTimeout(() => {
+    debounceCnt++
+    debounceDisp.innerText = debounceCnt
     let name = searchInput.value.toLowerCase();
     let filtered = students.filter((student) =>
       student.name.toLowerCase().includes(name)
