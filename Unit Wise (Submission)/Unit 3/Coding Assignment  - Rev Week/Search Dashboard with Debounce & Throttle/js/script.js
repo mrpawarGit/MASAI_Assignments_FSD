@@ -48,3 +48,4 @@ searchInput.addEventListener("input", () => {
 });
 
 fetchData();
+
