@@ -12,4 +12,4 @@ function dispData(){
   console.log(students)
 }
 
-fetchData()
+//fetchData()
