@@ -6,7 +6,16 @@
   <title>Dashboard</title>
 </head>
 <body>
-  <button id="logout-button">Logout</button>
+  <nav>
+    <h3>Welcome, <span id="username"></span></h3>
+    <button id="logout-button">Logout</button>
+  </nav>
+
+  <div id="conatiner">
+    <textarea id="userInput"></textarea>
+    <button id="submit-btn">Add</button>
+  </div>
+  <script type="module" src="js/dashboard.js"></script>
   <script type="module" src="js/auth.js"></script>
 </body>
 </html>
