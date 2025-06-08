@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Dashboard</title>
+  <style>
+    .note {
+      border: 1px solid #ddd;
+      padding: 8px;
+      margin: 8px 0;
+    }
+  </style>
 </head>
 <body>
   <nav>
@@ -11,12 +17,13 @@
     <button id="logout-button">Logout</button>
   </nav>
 
-  <div id="conatiner">
-    <textarea id="userInput"></textarea>
-    <button id="submit-btn">Add</button>
-    <div id="tasklist"></div>
+  <div id="task-container">
+    <h3>Task List</h3>
+    <textarea id="taskInput" placeholder="Add Task Here..."></textarea>
+    <button id="add-btn">Add</button>
+    <div id="task-list"></div>
   </div>
+
   <script type="module" src="js/dashboard.js"></script>
-  <script type="module" src="js/auth.js"></script>
 </body>
 </html>
