@@ -1,15 +1,9 @@
-import { auth, db } from "../firebase-config.js";
+import { auth, db } from "../firebas-config.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
-
-// import {
-//   doc,
-//   getDoc,
-//   setDoc,
-// } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("login-button");

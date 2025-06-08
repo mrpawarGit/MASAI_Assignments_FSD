@@ -1,70 +1,61 @@
-import { auth, db } from "../firebase-config.js";
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
+import { auth } from "../firebas-config.js";
 import {
-  doc,
-  getDoc,
-  addDoc,
-  collection,
-  getDocs,
-} from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const taskList = document.getElementById("task-list");
-  const taskInput = document.getElementById("taskInput");
-  const addBtn = document.getElementById("add-btn");
-  const logoutBtn = document.getElementById("logout-button");
-  let currentUser = null;
+const userEmail = localStorage.getItem("user");
+if (!userEmail) window.location.href = "index.html";
 
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-      window.location.href = "index.html";
-      return;
-    }
+document.getElementById("user-email").innerText = userEmail;
 
-    currentUser = user;
-    document.getElementById("username").innerText = currentUser.email;
+const taskList = document.getElementById("task-list");
 
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-    if (userDoc.exists()) {
-      loadNotes();
-    } else {
-      window.location.href = "index.html";
-    }
-  });
-
-  async function loadNotes() {
-    taskList.innerHTML = "";
-    const notesRef = collection(db, "notes");
-    const snapshot = await getDocs(notesRef);
-
-    snapshot.forEach((docSnap) => {
-      const note = docSnap.data();
-      if (note.userId === currentUser.uid) {
-        const noteDiv = document.createElement("div");
-        noteDiv.classList.add("note");
-        noteDiv.innerHTML = `<p>${note.content}</p>`;
-        taskList.appendChild(noteDiv);
-      }
-    });
-  }
-
-  addBtn.addEventListener("click", async () => {
-    const content = taskInput.value.trim();
-    if (!content) return;
-
-    await addDoc(collection(db, "notes"), {
-      content,
-      userId: currentUser.uid,
-      userEmail: currentUser.email,
-      createdAt: new Date(),
-    });
-
-    taskInput.value = "";
-    loadNotes();
-  });
-
-  logoutBtn.addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "index.html";
-  });
+document.getElementById("logout-btn").addEventListener("click", async () => {
+  await signOut(auth);
+  localStorage.removeItem("user");
+  window.location.href = "index.html";
 });
+
+document.getElementById("add-task").addEventListener("click", async () => {
+  const title = document.getElementById("task-title").value;
+  const body = document.getElementById("task-desc").value;
+
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: JSON.stringify({
+      title,
+      body,
+      userId: userEmail,
+    }),
+    headers: { "Content-type": "application/json" },
+  });
+
+  const task = await res.json();
+  renderTask(task);
+});
+
+async function fetchTasks() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const tasks = await res.json();
+  tasks.filter((t) => t.userId == userEmail).forEach(renderTask);
+}
+
+function renderTask(task) {
+  const div = document.createElement("div");
+  div.innerHTML = `
+    <h4>${task.title}</h4>
+    <p>${task.body}</p>
+    <button onclick="deleteTask(${task.id})">Delete</button>
+  `;
+  taskList.appendChild(div);
+}
+
+window.deleteTask = async (id) => {
+  await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    method: "DELETE",
+  });
+  location.reload();
+};
+
+fetchTasks();

@@ -2,27 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dashboard</title>
-  <style>
-    .note {
-      border: 1px solid #ddd;
-      padding: 8px;
-      margin: 8px 0;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Manager</title>
 </head>
 <body>
-  <nav>
-    <h3>Welcome, <span id="username"></span></h3>
-    <button id="logout-button">Logout</button>
-  </nav>
+  <h3>Welcome, <span id="user-email"></span></h3>
+  <button id="logout-btn">Logout</button>
 
-  <div id="task-container">
-    <h3>Task List</h3>
-    <textarea id="taskInput" placeholder="Add Task Here..."></textarea>
-    <button id="add-btn">Add</button>
-    <div id="task-list"></div>
-  </div>
+  <h2>Add Task</h2>
+  <input type="text" id="task-title" placeholder="Title">
+  <textarea id="task-desc" placeholder="Description"></textarea>
+  <button id="add-task">Add Task</button>
+
+  <h2>Task List</h2>
+  <div id="task-list"></div>
 
   <script type="module" src="js/dashboard.js"></script>
 </body>
