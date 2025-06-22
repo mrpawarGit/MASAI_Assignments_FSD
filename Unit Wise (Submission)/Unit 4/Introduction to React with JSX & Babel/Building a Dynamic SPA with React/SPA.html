@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React SPA</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar {
+        display: flex;
+        gap: 20px;
+        background-color: #282c34;
+        padding: 15px;
+        color: white;
+      }
+      .nav-link {
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+      }
+      .nav-link.active {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      .content {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function Navbar({ currentPage, onNavigate }) {
+        const links = ["Home", "About", "Contact"];
+
+        return (
+          <div className="navbar">
+            {links.map((page) => (
+              <span
+                key={page}
+                className={`nav-link ${currentPage === page ? "active" : ""}`}
+                onClick={() => onNavigate(page)}
+              >
+                {page}
+              </span>
+            ))}
+          </div>
+        );
+      }
+
+      function App() {
+        const [currentPage, setCurrentPage] = useState("Home");
+
+        const renderContent = () => {
+          switch (currentPage) {
+            case "Home":
+              return <h2>Welcome to Home Page</h2>;
+            case "About":
+              return <h2>About Us: We are building cool things with React</h2>;
+            case "Contact":
+              return <h2>Contact Us: demo@masai.com</h2>;
+            default:
+              return <h2>404 - Page Not Found</h2>;
+          }
+        };
+
+        return (
+          <div>
+            <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
+            <div className="content">{renderContent()}</div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
