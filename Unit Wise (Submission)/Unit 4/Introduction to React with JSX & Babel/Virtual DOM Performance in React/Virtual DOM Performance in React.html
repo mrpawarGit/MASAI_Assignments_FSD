@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual DOM Performance in React</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- JS -->
+    <h3 id="js-title">DOM vs React DOM</h3>
+    <button onclick="changeTitleJs()">Change Title (JS)</button>
+    <p>JS Updates: <span id="js-count">0</span></p>
+
+    <!-- React -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // js
+      let jsUpdateCount = 0;
+
+      function changeTitleJs() {
+        jsUpdateCount++;
+        document.getElementById("js-title").innerText = "Updated with JS";
+        document.getElementById("js-count").textContent = jsUpdateCount;
+      }
+
+      // React
+      function App() {
+        const [reactTitle, setReactTitle] = React.useState("DOM vs React DOM");
+        const [reactCount, setReactCount] = React.useState(0);
+
+        let changeTitleReact = () => {
+          setReactTitle("Updated with React");
+          setReactCount(reactCount + 1);
+        };
+
+        return (
+          <div>
+            <h3>{reactTitle}</h3>
+            <button onClick={changeTitleReact}>Change Title (React)</button>
+            <p>React Updates: {reactCount}</p>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
