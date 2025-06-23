@@ -17,6 +17,15 @@
       #colorBtn {
         cursor: pointer;
       }
+
+      #colorBtn.Green {
+        background-color: green;
+        color: white;
+      }
+      #colorBtn.Yellow {
+        background-color: yellow;
+        color: black;
+      }
     </style>
   </head>
   <body>
@@ -29,13 +38,14 @@
         const [color, setColor] = React.useState("Green");
 
         const colorToggle = () => {
-          setColor((prevColor) => (prevColor === "Green" ? "Yellow" : "Green"));
+          setColor((clr) => (clr === "Green" ? "Yellow" : "Green"));
         };
 
         return (
           <div>
             <button
               id="colorBtn"
+              className={color}
               onClick={colorToggle}
               style={{ backgroundColor: color }}
             >
