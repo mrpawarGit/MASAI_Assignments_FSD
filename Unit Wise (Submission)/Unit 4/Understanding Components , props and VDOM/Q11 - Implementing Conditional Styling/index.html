@@ -18,16 +18,28 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      function toggleButton() {
+      const { useState } = React;
+
+      function ToggleButton() {
+        const [color, setColor] = React.useState("green");
+
+        return (
+          <div>
+            <button>Color</button>
+          </div>
+        );
+      }
+
+      function App() {
         return (
           <>
-            <button>Color</button>
+            <ToggleButton />
           </>
         );
       }
-      let h1 = <h1>Hello</h1>;
+
       let root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<toggleButton />);
+      root.render(<App />);
     </script>
   </body>
 </html>
