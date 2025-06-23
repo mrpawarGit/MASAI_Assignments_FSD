@@ -13,6 +13,11 @@
       crossorigin
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      #colorBtn {
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -21,11 +26,21 @@
       const { useState } = React;
 
       function ToggleButton() {
-        const [color, setColor] = React.useState("green");
+        const [color, setColor] = React.useState("Green");
+
+        const colorToggle = () => {
+          setColor((prevColor) => (prevColor === "Green" ? "Yellow" : "Green"));
+        };
 
         return (
           <div>
-            <button>Color</button>
+            <button
+              id="colorBtn"
+              onClick={colorToggle}
+              style={{ backgroundColor: color }}
+            >
+              Color: {color}
+            </button>
           </div>
         );
       }
