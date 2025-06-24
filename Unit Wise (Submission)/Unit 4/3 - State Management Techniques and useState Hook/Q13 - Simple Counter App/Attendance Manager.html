@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Attendance Manager</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+    ul {
+      padding: 10px;
+      /* border: 1px solid; */
+    }
+    li {
+      list-style: none;
+      padding: 5px;
+      border: 1px solid;
+      margin-top: 5px;
+    }
+    button {
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function App() {
+        const [filter, setFilter] = useState("All");
+        const [students, setStudents] = useState([
+          { id: 1, name: "Rohan", present: true },
+          { id: 2, name: "Ramesh", present: false },
+          { id: 4, name: "Radha", present: true },
+          { id: 5, name: "Rajan", present: false },
+          { id: 6, name: "Rani", present: true },
+          { id: 7, name: "Roshani", present: true },
+        ]);
+
+        const toggleAttendance = (id) => {
+          setStudents(
+            students.map((s) =>
+              s.id === id ? { ...s, present: !s.present } : s
+            )
+          );
+        };
+
+        const filtered = students.filter((s) => {
+          if (filter === "All") return true;
+          return filter === "Present" ? s.present : !s.present;
+        });
+
+        const presentCount = students.filter((s) => s.present).length;
+
+        return (
+          <div>
+            <h1>Attendance Manager</h1>
+            <label>Filter: </label>
+            <select onChange={(e) => setFilter(e.target.value)}>
+              <option>All</option>
+              <option>Present</option>
+              <option>Absent</option>
+            </select>
+            <ul>
+              {filtered.map((s) => (
+                <li key={s.id}>
+                  {s.name} - {s.present ? "Present" : "Absent"}
+                  <button onClick={() => toggleAttendance(s.id)}>Toggle</button>
+                </li>
+              ))}
+            </ul>
+            <p>Total Present: {presentCount}</p>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
