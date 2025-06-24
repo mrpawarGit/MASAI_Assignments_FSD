@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Blog Toggle Viewer</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      * {
+        text-align: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .title {
+        cursor: pointer;
+        padding: 10px;
+        background-color: palevioletred;
+        color: white;
+        margin: 5px 0;
+        border-radius: 5px;
+      }
+      .title:hover {
+        background-color: rgb(196, 152, 166);
+      }
+      .content {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #f8a5a5;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      const blogs = [
+        {
+          title: "Mastering JavaScript",
+          content: "JavaScript is a powerful language for web development.",
+        },
+        {
+          title: "React in Indian Startups",
+          content: "React is widely used in many Indian tech companies.",
+        },
+        {
+          title: "Career in Web Development",
+          content: "Explore job roles and growth in web development.",
+        },
+      ];
+
+      function BlogPost() {
+        const [selectBlog, setSelectBlog] = useState(null);
+
+        return (
+          <div>
+            <h1>Blog Titles</h1>
+            {blogs.map((blog, index) => (
+              <div
+                key={index}
+                className="title"
+                onClick={() => setSelectBlog(blog)}
+              >
+                {blog.title}
+              </div>
+            ))}
+
+            <div className="content">
+              {selectBlog ? (
+                <>
+                  <h2>{selectBlog.title}</h2>
+                  <p>{selectBlog.content}</p>
+                </>
+              ) : (
+                <p>Click a blog to read</p>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<BlogPost />);
+    </script>
+  </body>
+</html>
