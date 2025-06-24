@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Count</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        margin: 10px;
+        padding: 20px;
+      }
+      button,
+      h2 {
+        padding: 10px;
+        margin: 10px;
+      }
+
+      button {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function Counter() {
+        const [count, setCount] = useState(0);
+
+        const increase = () => {
+          if (count == 10) {
+            alert("Goal Reached!");
+            setCount(0);
+          } else {
+            setCount(count + 1);
+          }
+        };
+
+        const decrease = () => {
+          setCount(count - 1);
+          if (count == 0) setCount(0);
+        };
+
+        return (
+          <div>
+            <button onClick={increase}>Increment</button>
+            <button onClick={decrease}>Decrement</button>
+            <h2>Count: {count}</h2>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<Counter />);
+    </script>
+  </body>
+</html>
