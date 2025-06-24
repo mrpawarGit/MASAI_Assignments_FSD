@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic List</title>
-  <script
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic List</title>
+    <script
       src="https://unpkg.com/react@18/umd/react.development.js"
       crossorigin
     ></script>
@@ -13,8 +13,32 @@
       crossorigin
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-</head>
-<body>
-  
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+      function UserCard({ user }) {
+        return (
+          <div className="user-card">
+            <h3>{user.name}</h3>
+            <p>Email: {user.email}</p>
+            <p>Age: {user.age}</p>
+          </div>
+        );
+      }
+
+      function UserList({ users }) {
+        return (
+          <div>
+            <h2>User List</h2>
+            {users.map((user, index) => (
+              <UserCard key={index} user={user} />
+            ))}
+          </div>
+        );
+      }
+    </script>
+  </body>
 </html>
