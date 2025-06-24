@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FakeStore</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        text-align: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding: 10px;
+        background-color: whitesmoke;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding: 10px;
+        margin: 10px;
+        justify-items: center;
+      }
+
+      .product-box {
+        background-color: white;
+        border: 1px solid;
+        padding: 15px;
+        max-width: 300px;
+        min-width: 300px;
+        margin: 10px;
+        gap: 10px;
+        border-radius: 8px;
+      }
+
+      img {
+        height: 200px;
+        width: 200px;
+      }
+
+      button {
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+        background-color: blue;
+        color: white;
+        border-radius: 5px;
+        font-size: 17px;
+      }
+
+      #clear-btn {
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function FakeStore() {
+        const [products, setProducts] = useState([]);
+
+        async function fetchData() {
+          let res = await axios.get("https://fakestoreapi.com/products");
+          setProducts(res.data);
+        }
+
+        function clearData() {
+          setProducts([]);
+        }
+
+        return (
+          <div>
+            <button onClick={fetchData}>Load Products</button>
+            <button id="clear-btn" onClick={clearData}>
+              Clear Products
+            </button>
+            <div className="product-grid">
+              {products.map((product) => (
+                <div key={product.id} className="product-box">
+                  <img src={product.image} alt="" />
+                  <h4>{product.title}</h4>
+                  <p>Price:{product.price}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <FakeStore />
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
