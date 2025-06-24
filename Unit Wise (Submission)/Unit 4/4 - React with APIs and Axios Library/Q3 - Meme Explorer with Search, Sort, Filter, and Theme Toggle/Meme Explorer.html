@@ -39,20 +39,20 @@
         margin: 0 5px;
       }
 
-      .meme-grid {
+      .container {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 15px;
         margin-top: 20px;
       }
 
-      .meme-card {
+      .meme-box {
         border: 1px solid;
         padding: 8px;
         border-radius: 5px;
       }
 
-      .meme-card img {
+      .meme-box img {
         width: 100%;
       }
     </style>
@@ -126,9 +126,9 @@
               </label>
             </div>
 
-            <div className="meme-grid">
+            <div className="container">
               {getFilteredMemes().map((meme) => (
-                <div key={meme.id} className="meme-card">
+                <div key={meme.id} className="meme-box">
                   <img src={meme.url} alt={meme.name} />
                   <p>{meme.name}</p>
                 </div>
