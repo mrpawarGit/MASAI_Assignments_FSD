@@ -6,21 +6,21 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let intervalId;
+    let timerInterval;
 
     if (isRunning && timer < 10) {
-      intervalId = setInterval(() => {
+      timerInterval = setInterval(() => {
         setTimer((prev) => prev + 1);
       }, 1000);
     }
 
-    // Stop 
+    // Stop
     if (timer === 10) {
       console.log("Sound::: 10sec");
       setIsRunning(false);
     }
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(timerInterval);
   }, [isRunning, timer]);
 
   function timerStart() {
