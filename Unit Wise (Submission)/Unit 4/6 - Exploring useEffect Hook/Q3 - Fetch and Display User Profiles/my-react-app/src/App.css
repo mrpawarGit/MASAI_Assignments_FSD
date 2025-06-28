@@ -1,0 +1,38 @@
+* {
+  text-align: center;
+  justify-content: center;
+}
+
+#theme-div {
+  padding: 8rem;
+  font-family: sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.light {
+  background-color: white;
+  color: black;
+}
+
+.light button {
+  background-color: black;
+  color: white;
+}
+
+.dark {
+  background-color: black;
+  color: white;
+}
+
+.dark button {
+  background-color: white;
+  color: black;
+}
