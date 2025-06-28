@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Paragraphs from "./components/Paragraphs";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -15,6 +16,7 @@ function App() {
           {theme === "light" ? "Light" : "Dark"}
         </button>
         <br />
+        <Paragraphs />
       </div>
     </>
   );
