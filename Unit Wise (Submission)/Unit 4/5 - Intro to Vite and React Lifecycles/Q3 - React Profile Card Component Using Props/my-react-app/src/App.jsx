@@ -1,10 +1,12 @@
 import { useState } from "react";
+import ProfileCard from "./components/ProfileCard";
 
 function App() {
-  return 
-  <>
-  
-  </>;
+  return (
+    <>
+      <ProfileCard />
+    </>
+  );
 }
 
 export default App;
