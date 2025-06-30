@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Homepage() {
   const [posts, setPosts] = useState([]);
@@ -26,6 +27,7 @@ function Homepage() {
     borderRadius: "8px",
     padding: "20px",
     cursor: "pointer",
+    textAlign: "center",
   };
 
   return (
@@ -35,6 +37,7 @@ function Homepage() {
         {posts.map((post) => (
           <div key={post.id} style={postBox}>
             <h5>{post.title}</h5>
+            <Link to={`/post/${post.id}`}>Read More</Link>
           </div>
         ))}
       </div>
