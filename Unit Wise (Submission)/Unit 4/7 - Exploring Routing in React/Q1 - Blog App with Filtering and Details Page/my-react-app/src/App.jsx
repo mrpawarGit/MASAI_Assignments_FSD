@@ -4,10 +4,12 @@ import Homepage from "./components/homepage";
 import { Route, Routes } from "react-router-dom";
 import { NoPageFound } from "./components/NoPageFound";
 import { Post } from "./components/Post";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />
