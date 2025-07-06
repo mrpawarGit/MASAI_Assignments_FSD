@@ -35,9 +35,9 @@ export default function Home() {
     border: "1px solid",
   };
 
-  const startInd = uiPage % 2 == 1 ? 0 : 10;
-  const endIndex = startInd + 10;
-  const visibleCharacters = characters.slice(startInd, endIndex);
+  const startIndex = uiPage % 2 == 1 ? 0 : 10;
+  const endIndex = startIndex + 10;
+  const visibleCharacters = characters.slice(startIndex, endIndex);
 
   return (
     <div>
