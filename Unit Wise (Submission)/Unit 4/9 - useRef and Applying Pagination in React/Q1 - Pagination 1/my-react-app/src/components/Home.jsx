@@ -13,17 +13,12 @@ export default function Home() {
 
   async function fetchData() {
     setLoading(true);
-    try {
-      const res = await fetch(
-        `https://rickandmortyapi.com/api/character?page=${apiPage}`
-      );
-      const data = await res.json();
-      setCharacters(data.results || []);
-    } catch (err) {
-      console.error("Fetch error:", err);
-    } finally {
-      setLoading(false);
-    }
+    const res = await fetch(
+      `https://rickandmortyapi.com/api/character?page=${apiPage}`
+    );
+    const data = await res.json();
+    setCharacters(data.results);
+    setLoading(false);
   }
 
   const charbox = {
@@ -40,7 +35,7 @@ export default function Home() {
     border: "1px solid",
   };
 
-  const startIndex = uiPage % 2 === 1 ? 0 : 10;
+  const startIndex = uiPage % 2 == 1 ? 0 : 10;
   const endIndex = startIndex + 10;
   const visibleCharacters = characters.slice(startIndex, endIndex);
 
