@@ -14,7 +14,7 @@ function FocusInput() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Focus Input Example</h2>
+      <h2>Focus Input</h2>
       <input type="text" ref={inputRef} style={{ padding: "8px" }} />
       <button onClick={handleFocus} style={{ marginLeft: "10px" }}>
         Focus Input
