@@ -19,7 +19,7 @@ function FocusInput() {
       <button onClick={handleFocus} style={{ marginLeft: "10px" }}>
         Focus Input
       </button>
-      {focused && <p>Focused!</p>}
+      {focused && <p>Focused...</p>}
     </div>
   );
 }
