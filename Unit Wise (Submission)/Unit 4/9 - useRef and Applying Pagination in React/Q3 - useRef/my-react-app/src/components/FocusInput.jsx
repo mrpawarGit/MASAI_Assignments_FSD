@@ -4,22 +4,21 @@ function FocusInput() {
   const [focused, setFocused] = useState(false);
   const inputRef = useRef(null);
 
-  function handleFocus() {
+  function handleF() {
     if (inputRef.current) {
       inputRef.current.focus();
-      inputRef.current.style.backgroundColor = "lightyellow";
+      inputRef.current.style.backgroundColor = "red";
       setFocused(true);
     }
   }
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       <h2>Focus Input</h2>
-      <input type="text" ref={inputRef} style={{ padding: "8px" }} />
-      <button onClick={handleFocus} style={{ marginLeft: "10px" }}>
+      <input type="text" ref={inputRef} style={{ padding: "10px" }} />
+      <button onClick={handleF} style={{ margin: "10px" }}>
         Focus Input
       </button>
-      {focused && <p>Focused...</p>}
     </div>
   );
 }
