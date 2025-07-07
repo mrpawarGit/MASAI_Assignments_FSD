@@ -4,10 +4,10 @@ import axios from "axios";
 function Home() {
   const [lists, setLists] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemPerPage = 10;
-
-  const lastPage = currentPage * itemPerPage;
-  const firstPage = lastPage - itemPerPage;
+  const itemsPerPage = 10;
+  const lastPage = currentPage * itemsPerPage;
+  const firstPage = lastPage - itemsPerPage;
+  const currentItems = lists.slice(firstPage, lastPage);
 
   useEffect(() => {
     getData();
@@ -23,12 +23,9 @@ function Home() {
     <div>
       <h2>TODO LIST</h2>
       <ul>
-        <ul>
-          {lists.map((list) => (
-            <li key={list.id}>{list.title}</li>
-          ))}
-        </ul>
-        {/*  */}
+        {currentItems.map((list) => (
+          <li key={list.id}>{list.title}</li>
+        ))}
       </ul>
     </div>
   );
