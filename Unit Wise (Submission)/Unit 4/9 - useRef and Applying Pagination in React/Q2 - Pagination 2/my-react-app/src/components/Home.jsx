@@ -3,8 +3,11 @@ import axios from "axios";
 
 function Home() {
   const [lists, setLists] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const itemPerPage = 10;
-  
+
+  const lastPage = currentPage * itemPerPage;
+  const firstPage = lastPage - itemPerPage;
 
   useEffect(() => {
     getData();
