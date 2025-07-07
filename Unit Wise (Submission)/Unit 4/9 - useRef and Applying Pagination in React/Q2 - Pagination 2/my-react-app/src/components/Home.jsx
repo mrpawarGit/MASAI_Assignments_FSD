@@ -21,7 +21,7 @@ function Home() {
     getData();
   }, []);
 
-  // to focus on 1st page on first load or reload
+  // to focus on 1st page on first load or reload 
   useEffect(() => {
     if (pageRef.current[0]) {
       pageRef.current[0].focus();
