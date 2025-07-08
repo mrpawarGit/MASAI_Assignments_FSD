@@ -19,31 +19,18 @@ export default function Counter() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        backgroundColor: "#f0f0f0",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: "Arial",
-      }}
-    >
-      <h1>Simple Counter</h1>
+    <div>
+      <h1>Counter</h1>
       <h2>Count: {state.count}</h2>
-      <div style={{ marginTop: "20px" }}>
-        <button
-          onClick={() => dispatch({ type: "INCREMENT" })}
-          style={{ marginRight: "10px", padding: "10px 20px" }}
-        >
-          Increment
-        </button>
+      <div>
         <button
           onClick={() => dispatch({ type: "DECREMENT" })}
-          style={{ padding: "10px 20px" }}
+          disabled={state.count == 0}
         >
           Decrement
+        </button>
+        <button onClick={() => dispatch({ type: "INCREMENT" })}>
+          Increment
         </button>
       </div>
     </div>
