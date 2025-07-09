@@ -1,15 +1,13 @@
-import { useState } from 'react'
-import './App.css'
-import Login from './components/Login'
+import './App.css';
+import Login from './components/Login';
+import { DataProvider } from './components/DataProvider';
 
 function App() {
-  
-
   return (
-    <>
-      <Login/>
-    </>
-  )
+    <DataProvider>
+      <Login />
+    </DataProvider>
+  );
 }
 
-export default App
+export default App;
