@@ -7,6 +7,7 @@ export default function Login() {
 
   const btnColor = {
     backgroundColor: isLog ? "red" : "green",
+    color: "white",
   };
   return (
     <div>
