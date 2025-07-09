@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import "./App.css";
 import { createContext } from "react";
+import Parent from "./components/Parent";
 
 const UserContext = createContext();
 
@@ -11,7 +12,9 @@ function App() {
   return (
     <>
       <UserContext.Provider value={{ name, age }}>
+        <Parent>
         <Child />
+        </Parent>
       </UserContext.Provider>
     </>
   );
