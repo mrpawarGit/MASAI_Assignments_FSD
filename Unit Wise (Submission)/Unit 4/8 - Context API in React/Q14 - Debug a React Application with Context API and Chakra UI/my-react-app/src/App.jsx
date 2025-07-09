@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ChakraProvider, Box, Flex, Grid, Button } from "@chakra-ui/react";
+import { useContext } from "react";
+import { AuthContext } from "./components/AuthContext";
+import { ThemeContext } from "./components/ThemeContext";
 
-function App() {
-  const [count, setCount] = useState(0)
+function AppContent() {
+  const { isLoggedIn, toggleAuth } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const isLight = theme === "light";
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Box
+      bg={isLight ? "gray.50" : "gray.800"}
+      minH="100vh"
+      color={isLight ? "black" : "white"}
+    >
+      <Flex
+        as="nav"
+        p="4"
+        bg={isLight ? "gray.100" : "gray.700"}
+        justifyContent="space-between"
+      >
+        <Button onClick={toggleAuth}>
+          {isLoggedIn ? "Log Out" : "Log In"}
+        </Button>
+        <Button onClick={toggleTheme}>
+          Toggle to {isLight ? "Dark" : "Light"} Theme
+        </Button>
+      </Flex>
+
+      <Grid
+        templateColumns={{
+          base: "1fr",
+          sm: "repeat(2, 1fr)",
+          md: "repeat(3, 1fr)",
+        }}
+        gap="4"
+        p="4"
+      >
+        {["Card 1", "Card 2", "Card 3"].map((card) => (
+          <Box
+            key={card}
+            p="4"
+            shadow="md"
+            bg={isLight ? "gray.200" : "gray.600"}
+            borderRadius="md"
+          >
+            {card}
+          </Box>
+        ))}
+      </Grid>
+
+      <Box
+        as="footer"
+        p="4"
+        bg={isLight ? "gray.300" : "gray.700"}
+        textAlign="center"
+      >
+        Footer Content
+      </Box>
+    </Box>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <ChakraProvider>
+      <AppContent />
+    </ChakraProvider>
+  );
+}
+
+export default App;
