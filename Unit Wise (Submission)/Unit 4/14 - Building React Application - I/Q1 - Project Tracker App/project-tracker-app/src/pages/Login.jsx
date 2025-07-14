@@ -1,0 +1,34 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import Navbar from "../components/Navbar";
+
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(email);
+    navigate("/");
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <br />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+}
