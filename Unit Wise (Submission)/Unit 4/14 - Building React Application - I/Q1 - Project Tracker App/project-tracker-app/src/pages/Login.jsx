@@ -17,18 +17,27 @@ export default function Login() {
   return (
     <div>
       <Navbar />
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
-        <button type="submit">Login</button>
-      </form>
+      <div className="form-container">
+        <h2 className="text-center mb-2">Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email" className="form-label"></label>
+            <input
+              id="email"
+              type="email"
+              className="form-input"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

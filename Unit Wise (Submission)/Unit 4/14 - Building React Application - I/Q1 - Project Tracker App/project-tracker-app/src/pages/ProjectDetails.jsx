@@ -41,25 +41,27 @@ export default function ProjectDetails() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-      {project ? (
-        <div>
-          <h2>{project.title}</h2>
-          <p>{project.description}</p>
-          <h3>Tasks</h3>
-          {tasks.map((task) => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onToggle={handleToggle}
-              onDelete={handleDelete}
-            />
-          ))}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
+      <div className="project-details-container">
+        {project ? (
+          <div>
+            <h2>{project.title}</h2>
+            <p>{project.description}</p>
+            <h3>Tasks</h3>
+            {tasks.map((task) => (
+              <TaskItem
+                key={task.id}
+                task={task}
+                onToggle={handleToggle}
+                onDelete={handleDelete}
+              />
+            ))}
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    </>
   );
 }

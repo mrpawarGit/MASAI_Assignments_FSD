@@ -28,27 +28,29 @@ export default function EditProject() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h2>Edit Project</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <br />
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <br />
-        <button type="submit">Update Project</button>
-      </form>
-    </div>
+      <div className="edit-project-container">
+        <h2>Edit Project</h2>
+        <form className="edit-project-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <br />
+          <textarea
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <br />
+          <button type="submit">Update Project</button>
+        </form>
+      </div>
+    </>
   );
 }

@@ -5,28 +5,21 @@ export default function Navbar() {
   const { user, logout } = useAuth();
 
   return (
-    <nav style={{ padding: "1rem", background: "#eee" }}>
-      <Link to="/">Dashboard</Link>
-      {user && (
-        <>
-          <Link to="/add" style={{ marginLeft: "1rem" }}>
-            Add Project
-          </Link>
-          <button style={{ marginLeft: "1rem" }} onClick={logout}>
-            Logout
-          </button>
-        </>
-      )}
-      {!user && (
-        <>
-          <Link to="/login" style={{ marginLeft: "1rem" }}>
-            Login
-          </Link>
-          <Link to="/signup" style={{ marginLeft: "1rem" }}>
-            Signup
-          </Link>
-        </>
-      )}
+    <nav>
+      <Link to="/">Project Tracker</Link>
+      <div>
+        {user ? (
+          <>
+            <Link to="/add">Add Project</Link>
+            <button onClick={logout}>Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Signup</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }

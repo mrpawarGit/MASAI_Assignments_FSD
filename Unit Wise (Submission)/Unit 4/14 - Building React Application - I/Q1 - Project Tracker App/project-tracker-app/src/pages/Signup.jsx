@@ -15,20 +15,22 @@ export default function Signup() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
-        <button type="submit">Signup</button>
-      </form>
-    </div>
+      <div className="signup-container">
+        <h2>Signup</h2>
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <br />
+          <button type="submit">Signup</button>
+        </form>
+      </div>
+    </>
   );
 }

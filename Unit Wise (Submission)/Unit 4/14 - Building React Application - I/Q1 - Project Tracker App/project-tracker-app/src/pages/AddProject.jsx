@@ -20,27 +20,29 @@ export default function AddProject() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h2>Add New Project</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <br />
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <br />
-        <button type="submit">Add Project</button>
-      </form>
-    </div>
+      <div className="add-project-container">
+        <h2>Add New Project</h2>
+        <form className="add-project-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <br />
+          <textarea
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <br />
+          <button type="submit">Add Project</button>
+        </form>
+      </div>
+    </>
   );
 }

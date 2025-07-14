@@ -19,12 +19,16 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h2>All Projects</h2>
-      {projects.map((p) => (
-        <ProjectCard key={p.id} {...p} />
-      ))}
-    </div>
+      <div className="dashboard-container">
+        <h2>All Projects</h2>
+        <div className="projects-list">
+          {projects.map((p) => (
+            <ProjectCard key={p.id} {...p} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
