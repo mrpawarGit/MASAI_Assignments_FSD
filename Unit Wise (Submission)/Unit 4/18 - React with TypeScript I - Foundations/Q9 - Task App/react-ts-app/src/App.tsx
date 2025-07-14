@@ -1,35 +1,89 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { Priority, type Task } from "./types";
+
+type Filter = "all" | "completed" | "incomplete";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState<Priority>(Priority.MEDIUM);
+  const [filter, setFilter] = useState<Filter>("all");
+
+  const addTask = () => {
+    if (!description.trim()) return;
+
+    const newTask: Task = {
+      id: Date.now(),
+      description,
+      priority,
+      completed: false,
+    };
+    setTasks([...tasks, newTask]);
+    setDescription("");
+    setPriority(Priority.MEDIUM);
+  };
+
+  const toggleTask = (id: number) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "completed") return task.completed;
+    if (filter === "incomplete") return !task.completed;
+    return true;
+  });
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Task Manager</h1>
+
+        <input
+          type="text"
+          placeholder="Enter task"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <select
+          value={priority}
+          onChange={(e) => setPriority(e.target.value as Priority)}
+        >
+          {Object.values(Priority).map((p) => (
+            <option key={p} value={p}>
+              {p}
+            </option>
+          ))}
+        </select>
+
+        <button onClick={addTask}>Add Task</button>
+
+        <div>
+          <button onClick={() => setFilter("all")}>All</button>
+          <button onClick={() => setFilter("completed")}>Completed</button>
+          <button onClick={() => setFilter("incomplete")}>Incomplete</button>
+        </div>
+
+        <ul>
+          {filteredTasks.map((task) => (
+            <li key={task.id}>
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => toggleTask(task.id)}
+              />
+              [{task.priority}] {task.description} {task.completed && "(Done)"}
+            </li>
+          ))}
+        </ul>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
