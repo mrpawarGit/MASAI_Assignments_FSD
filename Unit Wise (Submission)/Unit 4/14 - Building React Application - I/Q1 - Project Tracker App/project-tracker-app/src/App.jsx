@@ -7,8 +7,7 @@ import AddProject from "./pages/AddProject";
 import EditProject from "./pages/EditProject";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import './index.css'
-
+import "./index.css";
 
 function App() {
   return (
