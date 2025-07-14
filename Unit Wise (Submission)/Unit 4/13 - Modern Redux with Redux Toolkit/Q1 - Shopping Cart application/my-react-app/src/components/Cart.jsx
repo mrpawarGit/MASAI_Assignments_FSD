@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem } from "../features/cartSlice";
 import Item from "./Item";
+// import "../index.css"
 
 function Cart() {
   const items = useSelector((state) => state.cart.items);
