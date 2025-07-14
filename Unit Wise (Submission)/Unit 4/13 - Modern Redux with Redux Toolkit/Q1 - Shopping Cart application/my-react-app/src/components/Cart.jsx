@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeItem } from "../features/cartSlice";
+import { removeItem } from "../cart/cartSlice";
 import Item from "./Item";
 // import "../index.css"
 
