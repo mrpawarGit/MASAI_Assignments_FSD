@@ -36,8 +36,8 @@ const FeedbackForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ border: "1px solid" }}>
-      <h2>Feedback Form</h2>
+    <form onSubmit={handleSubmit}>
+      {/* <h2>Feedback Form</h2> */}
       <input
         placeholder="Name"
         value={name}
