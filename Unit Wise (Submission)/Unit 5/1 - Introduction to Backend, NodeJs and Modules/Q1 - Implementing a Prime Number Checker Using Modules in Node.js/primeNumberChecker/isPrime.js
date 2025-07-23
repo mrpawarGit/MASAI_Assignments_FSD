@@ -8,3 +8,4 @@ function isPrime(num) {
   return true;
 }
 
+MediaSourceHandle.export = isPrime;
