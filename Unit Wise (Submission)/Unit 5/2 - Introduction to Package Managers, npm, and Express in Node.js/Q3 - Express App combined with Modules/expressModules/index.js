@@ -24,7 +24,7 @@ app.get("/systemdetails", (req, res) => {
   res.send(sysData());
 });
 
-// /getip
+// getip
 app.get("/getip", (req, res) => {
   dns.lookup("masaischool.com", (err, address) => {
     res.send(`IP address of masaischool.com is: ${address || "Not Found"}`);
