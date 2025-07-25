@@ -1,6 +1,7 @@
 const express = require("express");
 const readData = require("./read");
 const sysData = require("./systemData");
+const dns = require("dns");
 
 const app = express();
 
@@ -25,7 +26,9 @@ app.get("/systemdetails", (req, res) => {
 
 // /getip
 app.get("/getip", (req, res) => {
-  res.redirect("https://masaischool.com/");
+  dns.lookup("masaischool.com", (err, address) => {
+    res.send(`IP address of masaischool.com is: ${address || "Not Found"}`);
+  });
 });
 
 app.listen(3000, () => {
