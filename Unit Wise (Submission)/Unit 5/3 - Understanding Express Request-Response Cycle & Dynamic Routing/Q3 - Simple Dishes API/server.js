@@ -6,7 +6,7 @@ const fs = require("fs");
 app.use(express.json());
 
 // route for reading file
-app.get("/all-dishes", (req, res) => {
+app.get("/dishes", (req, res) => {
   let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
   let dishes = data.dishes;
   console.log(dishes);
@@ -14,15 +14,22 @@ app.get("/all-dishes", (req, res) => {
 });
 
 // add new dishes
-app.post("/add-dish", (req, res) => {
+app.post("/dishes", (req, res) => {
   let newDish = req.body;
   let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
   let dishes = data.dishes;
   // push
+  let id = dishes[dishes.length - 1].id + 1;
+  newDish = { ...newDish, id };
   dishes.push(newDish);
   // update in db
   fs.writeFileSync("./db.json", JSON.stringify(data));
-  res.json({ msg: "New Dishes Added", newDish: newDish });
+  res.status(200).json({ msg: "New Dishe Added", newDish: newDish });
+});
+
+// get dish by id
+app.get("/dishes/:id", (req, res) => {
+  
 });
 
 // default handle

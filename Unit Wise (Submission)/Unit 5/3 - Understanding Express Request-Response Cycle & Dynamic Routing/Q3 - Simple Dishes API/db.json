@@ -1,3 +1,1 @@
-{
-  "dishes": [{ "id": 1, "name": "Idly", "price": 50, "category": "Breakfast" }]
-}
+{"dishes":[{"name":"Idly","price":50,"category":"Breakfast","id":1},{"name":"Sambar","price":40,"category":"Curry","id":2},{"name":"Kachori","price":60,"category":"Breakfast","id":3},{"name":"Misal","price":90,"category":"Breakfast","id":4},{"name":"vadapav","price":20,"category":"snacks","id":5}]}
