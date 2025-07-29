@@ -10,11 +10,15 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/aboutus", (req, res) => {
-  res.send({ message: "Welcome to About Us" });
+  res.status(200).json({ message: "Welcome to About Us" });
 });
 
 app.get("/contactus", (req, res) => {
-  res.send("dummy contact details");
+  res.send({
+    name: "Demo",
+    email: "demo@ex.com",
+    phone: "+911234567890",
+  });
 });
 
 app.use((req, res) => {
