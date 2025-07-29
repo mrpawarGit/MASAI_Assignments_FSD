@@ -30,11 +30,6 @@ app.post("/dishes", (req, res) => {
 // get dish by name
 app.get("/dishes/get", (req, res) => {
   const { name } = req.query;
-  // if (!name) {
-  //   return res
-  //     .status(400)
-  //     .json({ message: "Please provide a dish name to search" });
-  // }
 
   let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
   let dishes = data.dishes;
