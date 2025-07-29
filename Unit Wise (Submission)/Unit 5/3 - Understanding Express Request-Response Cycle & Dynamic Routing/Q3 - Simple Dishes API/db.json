@@ -1,0 +1,3 @@
+{
+  "dishes": [{ "id": 1, "name": "Idly", "price": 50, "category": "Breakfast" }]
+}
