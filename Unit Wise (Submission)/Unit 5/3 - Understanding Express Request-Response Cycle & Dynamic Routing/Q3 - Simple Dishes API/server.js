@@ -33,32 +33,23 @@ app.get("/dishes/:id", (req, res) => {});
 // update dish by id
 app.put("/dishes/:id", (req, res) => {
   let id = req.params.id;
-  // read file and check if id is present
+  let updatedFields = req.body;
+
   let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
   let dishes = data.dishes;
-  let oldDish = req.body;
 
   let index = dishes.findIndex((dish) => dish.id == id);
-  console.log(index);
-  if (index == -1) {
-    res.json({ msg: "Dish Not Found" });
+
+  if (index === -1) {
+    res.status(404).json({ msg: "Dish Not Found" });
   } else {
-    let updatedDishes = dishes.map((ele, index) => {
-      if (ele.id == id) {
-        return { ...ele, ...oldDish };
-      } else {
-        return ele;
-      }
-    });
+    // update dish
+    dishes[index] = { ...dishes[index], ...updatedFields };
+    // replace with old
+    data.dishes = dishes;
 
-    // replace with old dish
-    dishes = updatedDishes;
-
-    // update in db
     fs.writeFileSync("./db.json", JSON.stringify(data));
     res.status(200).json({ msg: "Dish Updated", updatedDish: dishes[index] });
-
-    res.json({ msg: "Dish Updated" });
   }
 });
 
