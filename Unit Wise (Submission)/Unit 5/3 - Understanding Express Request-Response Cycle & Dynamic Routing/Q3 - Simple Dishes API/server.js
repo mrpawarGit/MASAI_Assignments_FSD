@@ -10,7 +10,7 @@ app.get("/dishes", (req, res) => {
   let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
   let dishes = data.dishes;
   console.log(dishes);
-  res.send(dishes);
+  res.status(200).send(dishes);
 });
 
 // add new dishes
@@ -28,8 +28,38 @@ app.post("/dishes", (req, res) => {
 });
 
 // get dish by id
-app.get("/dishes/:id", (req, res) => {
-  
+app.get("/dishes/:id", (req, res) => {});
+
+// update dish by id
+app.put("/dishes/:id", (req, res) => {
+  let id = req.params.id;
+  // read file and check if id is present
+  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  let dishes = data.dishes;
+  let oldDish = req.body;
+
+  let index = dishes.findIndex((dish) => dish.id == id);
+  console.log(index);
+  if (index == -1) {
+    res.json({ msg: "Dish Not Found" });
+  } else {
+    let updatedDishes = dishes.map((ele, index) => {
+      if (ele.id == id) {
+        return { ...ele, ...oldDish };
+      } else {
+        return ele;
+      }
+    });
+
+    // replace with old dish
+    dishes = updatedDishes;
+
+    // update in db
+    fs.writeFileSync("./db.json", JSON.stringify(data));
+    res.status(200).json({ msg: "Dish Updated", updatedDish: dishes[index] });
+
+    res.json({ msg: "Dish Updated" });
+  }
 });
 
 // default handle
