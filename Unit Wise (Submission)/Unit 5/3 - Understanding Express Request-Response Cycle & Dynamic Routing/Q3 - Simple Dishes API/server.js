@@ -28,28 +28,47 @@ app.post("/dishes", (req, res) => {
 });
 
 // get dish by id
-app.get("/dishes/:id", (req, res) => {});
+app.get("/dishes/:id", (req, res) => {
+  let id = req.params.id;
+  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  let dishes = data.dishes;
+  let index = dishes.findIndex((dish) => dish.id == id);
+  if (index == -1) {
+    res.json({ msg: "Dish Not Found" });
+  } else {
+    res.json({ msg: "Dish Found", dish: dishes[index] });
+  }
+});
 
 // update dish by id
 app.put("/dishes/:id", (req, res) => {
   let id = req.params.id;
-  let updatedFields = req.body;
-
+  // read file and check if id is present
   let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
   let dishes = data.dishes;
+  let oldDish = req.body;
 
   let index = dishes.findIndex((dish) => dish.id == id);
-
-  if (index === -1) {
-    res.status(404).json({ msg: "Dish Not Found" });
+  console.log(index);
+  if (index == -1) {
+    res.json({ msg: "Dish Not Found" });
   } else {
-    // update dish
-    dishes[index] = { ...dishes[index], ...updatedFields };
-    // replace with old
-    data.dishes = dishes;
+    let updatedDishes = dishes.map((ele, index) => {
+      if (ele.id == id) {
+        return { ...ele, ...oldDish };
+      } else {
+        return ele;
+      }
+    });
 
+    // replace with old dish
+    data.dishes = updatedDishes;
+
+    // update in db
     fs.writeFileSync("./db.json", JSON.stringify(data));
-    res.status(200).json({ msg: "Dish Updated", updatedDish: dishes[index] });
+    res
+      .status(200)
+      .json({ msg: "Dish Updated", updatedDish: updatedDishes[index] });
   }
 });
 
