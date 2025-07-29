@@ -27,6 +27,31 @@ app.post("/dishes", (req, res) => {
   res.status(200).json({ msg: "New Dishe Added", newDish: newDish });
 });
 
+// get dish by name
+app.get("/dishes/get", (req, res) => {
+  const { name } = req.query;
+  // if (!name) {
+  //   return res
+  //     .status(400)
+  //     .json({ message: "Please provide a dish name to search" });
+  // }
+
+  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  let dishes = data.dishes;
+  // console.log("GG");
+
+  // lowring case
+  let matchedDishes = dishes.filter((dish) =>
+    dish.name.toLowerCase().includes(name.toLowerCase())
+  );
+
+  if (matchedDishes.length > 0) {
+    res.status(200).json(matchedDishes);
+  } else {
+    res.status(404).json({ message: "No dishes found" });
+  }
+});
+
 // get dish by id
 app.get("/dishes/:id", (req, res) => {
   let id = req.params.id;
