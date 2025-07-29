@@ -5,16 +5,24 @@ const fs = require("fs");
 // body parser
 app.use(express.json());
 
-app.post("/add", (req, res) => {
-  console.log(req.body);
-  res.send("Data Added..");
-});
-
 // route for reading file
 app.get("/all-dishes", (req, res) => {
-  let data = fs.readFileSync("./db.json", "utf-8");
-  console.log(data);
-  res.send(data);
+  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  let dishes = data.dishes;
+  console.log(dishes);
+  res.send(dishes);
+});
+
+// add new dishes
+app.post("/add-dish", (req, res) => {
+  let newDish = req.body;
+  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  let dishes = data.dishes;
+  // push
+  dishes.push(newDish);
+  // update in db
+  fs.writeFileSync("./db.json", JSON.stringify(data));
+  res.json({ msg: "New Dishes Added", newDish: newDish });
 });
 
 // default handle
