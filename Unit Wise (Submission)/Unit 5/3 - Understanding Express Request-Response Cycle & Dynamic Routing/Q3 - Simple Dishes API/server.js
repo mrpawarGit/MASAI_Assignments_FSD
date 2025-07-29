@@ -1,6 +1,15 @@
 const express = require("express");
 const app = express();
 
+// body parser
+app.use(express.json());
+
+app.post("/add", (req, res) => {
+  console.log(req.body);
+  res.send("Data Added..");
+});
+
+// default handle
 app.use((req, res) => {
   res.status(404).json({ error: "404 Not Found" });
 });
