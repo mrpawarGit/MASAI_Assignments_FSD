@@ -28,7 +28,16 @@ app.get("/books", (req, res) => {
 
 // post / add book
 app.post("/books", (req, res) => {
-  res.status(200).send("All Books");
+  let newBook = req.body;
+  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  let books = data.books;
+
+  let id = books[books.length - 1].id + 1;
+  newBook = { ...newBook, id };
+  books.push(newBook);
+  fs.writeFileSync("./db.json", JSON.stringify(data));
+
+  res.status(200).json({ msg: "New Book Added", book: newBook });
 });
 
 app.listen(3000, () => {
