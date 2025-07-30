@@ -23,7 +23,7 @@ app.get("/books", (req, res) => {
   let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
   let books = data.books;
   console.log(books);
-  res.status(200).send("All Books");
+  res.status(200).send(books);
 });
 
 // post / add book
