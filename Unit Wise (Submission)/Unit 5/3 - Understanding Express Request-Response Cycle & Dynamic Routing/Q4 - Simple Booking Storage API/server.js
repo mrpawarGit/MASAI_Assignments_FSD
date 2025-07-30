@@ -1,6 +1,10 @@
 const express = require("express");
+const fs = require("fs");
 
 const app = express();
+
+// body parser
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.status(200).send("Server Started");
@@ -16,6 +20,9 @@ DELETE /books/:id → Delete a book by its ID.
 
 // get all books
 app.get("/books", (req, res) => {
+  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  let books = data.books;
+  console.log(books);
   res.status(200).send("All Books");
 });
 
