@@ -24,4 +24,31 @@ TaskRouter.post("/", async (req, res) => {
   }
 });
 
+// update
+TaskRouter.put("/:taskid", async (req, res) => {
+  const taskid = req.params.taskid;
+  const newTask = req.body;
+  try {
+    const task = await TaskModel.findById(taskid);
+    if (!task) {
+      res.status(404).json({ msg: "Task / Id not found" });
+    }
+    const updated = await TaskModel.findByIdAndUpdate(taskid, newTask);
+    res.json({ msg: "Task Updated", newTask });
+  } catch (error) {
+    res.status(404).json({ msg: "Something went wrong" });
+  }
+});
+
+// delete
+TaskRouter.delete("/:taskid", async (req, res) => {
+  try {
+    const taskid = req.params.taskid;
+    await TaskModel.findByIdAndDelete(taskid);
+    res.json({ msg: "Task Deleted" });
+  } catch (error) {
+    res.status(404).json({ msg: "Something went wrong" });
+  }
+});
+
 module.exports = TaskRouter;
