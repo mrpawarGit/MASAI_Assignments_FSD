@@ -1,0 +1,9 @@
+{
+  "dishes": [
+    { "name": "Idly", "price": 50, "category": "Breakfast", "id": 1 },
+    { "name": "Sambar", "price": 105, "category": "Curry", "id": 2 },
+    { "name": "Kachori", "price": 60, "category": "Breakfast", "id": 3 },
+    { "name": "Misal", "price": 90, "category": "Breakfast", "id": 4 },
+    { "name": "vadapav", "price": 20, "category": "snacks", "id": 5 }
+  ]
+}
