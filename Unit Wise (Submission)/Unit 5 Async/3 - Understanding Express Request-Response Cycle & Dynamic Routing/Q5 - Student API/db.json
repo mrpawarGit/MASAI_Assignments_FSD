@@ -1,0 +1,16 @@
+{
+  "students": [
+    {
+      "name": "Aarav Sharma",
+      "course": "Full Stack Web",
+      "batch": "April 2025",
+      "id": 1
+    },
+    {
+      "name": "Aarav Kapoor",
+      "course": "Full Stack Web",
+      "batch": "May 2025",
+      "id": 2
+    }
+  ]
+}

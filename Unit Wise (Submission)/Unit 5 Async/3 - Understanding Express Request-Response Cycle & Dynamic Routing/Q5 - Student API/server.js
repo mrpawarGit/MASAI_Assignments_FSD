@@ -1,35 +1,46 @@
 const express = require("express");
-const fs = require("fs");
+const fs = require("fs").promises;
 
 const app = express();
-
 app.use(express.json());
 
-// get
-app.get("/students", (req, res) => {
-  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
-  let students = data.students;
-  console.log(students);
-  res.status(200).send(students);
+// get students
+app.get("/students", async (req, res) => {
+  try {
+    const data = await fs.readFile("./db.json", "utf-8");
+    const students = JSON.parse(data).students || [];
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json({ msg: "Error reading data", error: error.message });
+  }
 });
 
-// post
-app.post("/students", (req, res) => {
-  let newStudent = req.body;
-  let data = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
-  // let students = data.students;
-  let id = books[books.length - 1].id + 1;
-  newStudent = { ...newStudent, id };
-  books.push(newStudent);
-  fs.writeFileSync("./db.json", JSON.stringify(data));
+// post student
+app.post("/students", async (req, res) => {
+  try {
+    const newStudent = req.body;
+    const data = await fs.readFile("./db.json", "utf-8");
+    const parsed = JSON.parse(data);
+    const students = parsed.students || [];
 
-  res.status(200).json({ msg: "New Book Added", book: newStudent });
+    const id = students.length ? students[students.length - 1].id + 1 : 1;
+    const studentWithId = { ...newStudent, id };
+
+    students.push(studentWithId);
+    parsed.students = students;
+
+    await fs.writeFile("./db.json", JSON.stringify(parsed, null, 2));
+
+    res.status(201).json({ msg: "New student added", student: studentWithId });
+  } catch (error) {
+    res.status(500).json({ msg: "Error saving student", error: error.message });
+  }
 });
 
 app.use((req, res) => {
-  res.json({ msg: "Not Found" });
+  res.status(404).json({ msg: "Not Found" });
 });
 
-app.listen(3000, (req, res) => {
+app.listen(3000, () => {
   console.log("Server started http://localhost:3000/");
 });
