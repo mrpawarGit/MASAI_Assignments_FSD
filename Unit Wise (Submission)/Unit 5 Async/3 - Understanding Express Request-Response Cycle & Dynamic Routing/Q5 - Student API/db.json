@@ -1,16 +1,22 @@
 {
   "students": [
     {
-      "name": "Aarav Sharma",
-      "course": "Full Stack Web",
-      "batch": "April 2025",
-      "id": 1
-    },
-    {
       "name": "Aarav Kapoor",
       "course": "Full Stack Web",
       "batch": "May 2025",
+      "id": 1
+    },
+    {
+      "name": "Aarav Roy",
+      "course": "Full Stack Web",
+      "batch": "May 2025",
       "id": 2
+    },
+    {
+      "name": "Manisha Dube",
+      "course": "Full Stack",
+      "batch": "July 2025",
+      "id": 3
     }
   ]
 }
