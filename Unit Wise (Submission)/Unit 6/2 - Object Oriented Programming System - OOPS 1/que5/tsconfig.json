@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "module": "commonjs",
+    "target": "ES6",
+    "strict": true,
+  }
+}
