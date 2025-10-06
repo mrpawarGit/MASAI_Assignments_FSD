@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",        // Output folder for compiled JS
+    "rootDir": "./src",        // Source folder for TS files
+    "target": "ES6",           // JS version to compile to
+    "module": "commonjs",      // Module system
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src"],          // Compile only TS files in src/
+  "exclude": ["node_modules"]  // Ignore node_modules
+}
