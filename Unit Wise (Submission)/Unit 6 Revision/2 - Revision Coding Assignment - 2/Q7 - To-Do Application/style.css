@@ -1,0 +1,15 @@
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+body {
+  text-align: center;
+}
+button {
+  margin: 5px;
+}
+
+ul {
+  list-style: none;
+}
