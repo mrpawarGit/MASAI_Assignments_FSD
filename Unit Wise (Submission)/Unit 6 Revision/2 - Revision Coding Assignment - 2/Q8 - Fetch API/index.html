@@ -4,7 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>API Fetch</title>
-    <style></style>
+    <style>
+      .foodContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        border: 2px solid red;
+        padding: 10px;
+        margin-top: 10px;
+        justify-content: center;
+      }
+
+      input {
+        margin: 10px;
+        padding: 10px;
+        width: 30%;
+        margin-left: 25%;
+      }
+
+      .foodbox {
+        border: 1px solid #aaa;
+        width: 200px;
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .foodbox img {
+        width: 180px;
+        border-radius: 8px;
+      }
+    </style>
   </head>
   <body>
     <input
@@ -14,7 +44,14 @@
       oninput="handleSearch()"
     />
 
-    <div id="container" class="foodContiner"></div>
+    <button onclick="filterMeals('veg')">Veg</button>
+    <button onclick="filterMeals('nonveg')">Non-Veg</button>
+    <button onclick="sortAll('asc')">A-Z ⬇️</button>
+    <button onclick="sortAll('dsc')">⬆️ Z-A</button>
+    <br />
+
+    <div id="container" class="foodContainer"></div>
+
     <script src="script.js"></script>
   </body>
 </html>
