@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>5-Day Forecast</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #eef2f3;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      header {
+        background: #2196f3;
+        color: white;
+        padding: 15px;
+      }
+      #forecastContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        gap: 15px;
+      }
+      .day {
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        width: 150px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>5-Day Weather Forecast</h1></header>
+    <div id="forecastContainer"></div>
+    <script>
+      const apiKey = "bf4391e00e92fa21216d434459c12644";
+      const params = new URLSearchParams(window.location.search);
+      const city = params.get("city");
+
+      async function getForecast() {
+        const res = await fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+        );
+        const data = await res.json();
+        const forecastContainer = document.getElementById("forecastContainer");
+        const grouped = {};
+        data.list.forEach((item) => {
+          const date = item.dt_txt.split(" ")[0];
+          if (!grouped[date]) grouped[date] = [];
+          grouped[date].push(item);
+        });
+        Object.keys(grouped)
+          .slice(0, 5)
+          .forEach((date) => {
+            const dayData = grouped[date];
+            const temps = dayData.map((i) => i.main.temp);
+            const min = Math.min(...temps),
+              max = Math.max(...temps);
+            const icon = dayData[0].weather[0].icon;
+            const desc = dayData[0].weather[0].description;
+            const card = document.createElement("div");
+            card.className = "day";
+            card.innerHTML = `
+          <h3>${date}</h3>
+          <img src="https://openweathermap.org/img/wn/${icon}.png">
+          <p>${desc}</p>
+          <p>Min: ${min.toFixed(1)}°C</p>
+          <p>Max: ${max.toFixed(1)}°C</p>
+        `;
+            forecastContainer.appendChild(card);
+          });
+      }
+
+      getForecast();
+    </script>
+  </body>
+</html>
