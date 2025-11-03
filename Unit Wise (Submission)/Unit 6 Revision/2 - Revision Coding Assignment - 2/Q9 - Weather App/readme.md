@@ -4,6 +4,12 @@ A responsive and user-friendly weather web application built with **HTML**, **CS
 
 ---
 
+## 🌐Live - [Weather App](https://weather-map-5days.netlify.app/)
+
+---
+<img width="1916" height="939" alt="image" src="https://github.com/user-attachments/assets/0b66e657-49af-43ca-90aa-93beb1ac3623" />
+
+
 ## 🚀 Features
 
 ✅ **Current Location Access**
@@ -60,11 +66,6 @@ A responsive and user-friendly weather web application built with **HTML**, **CS
 ## 🔑 Setup Instructions
 
 ### 1. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/weather-app.git
-cd weather-app
-```
 
 ### 2. Get an OpenWeatherMap API Key
 
@@ -126,20 +127,6 @@ https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=m
 ```
 https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&units=metric
 ```
-
----
-
-## 🖼️ UI Preview (Optional)
-
-You can include screenshots here:
-
-```
-📸 /screenshots
- ├── home-page.png
- ├── search-result.png
- └── forecast-page.png
-```
-
 ---
 
 ## 🧩 Future Enhancements
