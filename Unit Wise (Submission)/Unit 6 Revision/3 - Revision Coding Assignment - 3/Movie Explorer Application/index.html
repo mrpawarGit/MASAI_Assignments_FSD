@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Movie Explorer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>🎬 Movie Explorer</h1>
+      <p class="tag">Search and browse movies via OMDb</p>
+      <label for="search" class="visually-hidden">Search movies</label>
+      <input
+        id="search"
+        class="search"
+        type="search"
+        placeholder="Search for a movie (e.g., Inception)"
+        autocomplete="off"
+        aria-label="Search movies"
+      />
+    </header>
+
+    <main class="container">
+      <section class="status" aria-live="polite" aria-atomic="true">
+        <div id="loader" class="loader" hidden>Loading…</div>
+        <div id="message" class="message" hidden></div>
+      </section>
+
+      <section
+        id="grid"
+        class="grid"
+        aria-live="polite"
+        aria-busy="false"
+      ></section>
+    </main>
+
+    <nav class="pager" aria-label="Pagination">
+      <button id="prevBtn" class="btn" disabled>◀︎ Prev</button>
+      <span id="pageInfo" class="page-info" aria-live="polite">Page 1</span>
+      <button id="nextBtn" class="btn" disabled>Next ▶︎</button>
+    </nav>
+
+    <footer class="site-footer">
+      <small>Powered by OMDb • Built with ❤️ and vanilla JS</small>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
